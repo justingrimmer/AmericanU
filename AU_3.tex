@@ -1,0 +1,1869 @@
+\documentclass{beamer}
+
+%\usepackage[table]{xcolor}
+\mode<presentation> {
+  \usetheme{Boadilla}
+%  \usetheme{Pittsburgh}
+%\usefonttheme[2]{sans}
+\renewcommand{\familydefault}{cmss}
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+%\usepackage{palatino}
+%\usepackage{cmbright}
+  \setbeamercovered{transparent}
+\useinnertheme{rectangles}
+}
+%\usepackage{normalem}{ulem}
+%\usepackage{colortbl, textcomp}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{structure}{fg= black}
+\definecolor{trial}{cmyk}{1,0,0, 0}
+\definecolor{trial2}{cmyk}{0.00,0,1, 0}
+\definecolor{darkgreen}{rgb}{0,.4, 0.1}
+\usepackage{array}
+\beamertemplatesolidbackgroundcolor{white}  \setbeamercolor{alerted
+text}{fg=red}
+
+\setbeamertemplate{caption}[numbered]\newcounter{mylastframe}
+
+%\usepackage{color}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{colortbl}
+%\usepackage[usenames, dvipsnames]{color}
+%\setbeamertemplate{caption}[numbered]\newcounter{mylastframe}c
+%\newcolumntype{Y}{\columncolor[cmyk]{0, 0, 1, 0}\raggedright}
+%\newcolumntype{C}{\columncolor[cmyk]{1, 0, 0, 0}\raggedright}
+%\newcolumntype{G}{\columncolor[rgb]{0, 1, 0}\raggedright}
+%\newcolumntype{R}{\columncolor[rgb]{1, 0, 0}\raggedright}
+
+%\begin{beamerboxesrounded}[upper=uppercol,lower=lowercol,shadow=true]{Block}
+%$A = B$.
+%\end{beamerboxesrounded}}
+\renewcommand{\familydefault}{cmss}
+%\usepackage[all]{xy}
+
+\usepackage{tikz}
+\usepackage{lipsum}
+
+ \newenvironment{changemargin}[3]{%
+ \begin{list}{}{%
+ \setlength{\topsep}{0pt}%
+ \setlength{\leftmargin}{#1}%
+ \setlength{\rightmargin}{#2}%
+ \setlength{\topmargin}{#3}%
+ \setlength{\listparindent}{\parindent}%
+ \setlength{\itemindent}{\parindent}%
+ \setlength{\parsep}{\parskip}%
+ }%
+\item[]}{\end{list}}
+\usetikzlibrary{arrows}
+%\usepackage{palatino}
+%\usepackage{eulervm}
+\usecolortheme{lily}
+\newtheorem{com}{Comment}
+\newtheorem{lem} {Lemma}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}
+\newtheorem{defn}{Definition}
+\newtheorem{cor}{Corollary}
+\newtheorem{obs}{Observation}
+ \numberwithin{equation}{section}
+%\usepackage[latin1]{inputenc}
+\title[Text as Data] % (optional, nur bei langen Titeln nötig)
+{Text as Data}
+
+\author{Justin Grimmer}
+\institute[Stanford University]{Professor\\Department of Political Science \\  Stanford University}
+\vspace{0.3in}
+
+
+\date{May 24th, 2019}%[Big Data Workshop]
+%\date{\today}
+
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Discovery and Measurement}
+
+What is the research process? (Grimmer, Roberts, and Stewart 2019)
+
+\begin{itemize}
+  \item[1)] \alert{Discovery}: a hypothesis or view of the world
+  \item[2)] \alert{Measurement} according to some organization
+  \item[3)] \alert{Causal Inference}: effect of some intervention
+\end{itemize}
+
+Text as data methods assist at each stage of research process
+
+\end{frame}
+
+
+
+\begin{frame}
+
+\huge
+
+Measurement
+
+
+\end{frame}
+
+
+
+
+
+
+% \begin{frame}
+% \frametitle{Topic and Mixed Membership Models}
+
+% \invisible<6->{\alert{Clustering}\\
+%  Document $\leadsto$ One Cluster}\\
+% \invisible<1-5>{\alert{Topic Models} (Mixed Membership) \\
+% Document $\leadsto$ Many clusters}
+
+
+% \begin{tikzpicture}
+
+% \node (doc1) at (-8,5.5) [] {Doc 1} ;
+% \node (doc2) at (-8, 4.5) [] {Doc 2} ;
+% \node (doc3) at (-8, 3.5) [] {Doc 3} ;
+% \node (doc4) at (-8, 2.5) [] {$\vdots$} ;
+% \node (doc5) at ( -8, 1.5) [] {Doc $N$} ;
+
+
+% \node (clust1) at (-1, 5) [] {Cluster 1} ;
+% \node (clust2) at (-1, 4) [] {Cluster 2} ;
+% \node (clustd) at (-1, 3) [] {$\vdots$} ;
+% \node (clust4) at (-1, 2) [] {Cluster $K$} ;
+
+% \invisible<1,3->{\draw[->, line width = 1.5pt]  (doc1)  to [out=0, in=180] (clust4) ; }
+% \invisible<1-2,4->{\draw[->, line width = 1.5pt]  (doc2)  to [out=0, in=180] (clust1) ; }
+% \invisible<1-3,5->{\draw[->, line width = 1.5pt]  (doc3)  to [out=0, in=180] (clust2) ; }
+% \invisible<1-4,6->{\draw[->, line width = 1.5pt]  (doc5)  to [out=0, in=180] (clust1) ; }
+
+% \invisible<1-6>{\draw[->, line width= 1.5pt] (doc1) to [out=0, in =180] (clust1) ;
+% \draw[->, line width= 1.5pt] (doc1) to [out=0, in =180] (clust2) ;
+% \draw[->, line width= 1.5pt] (doc1) to [out=0, in =180] (clust4) ;
+% }
+
+
+% \end{tikzpicture}
+
+% \pause \pause \pause \pause \pause \pause
+
+% \end{frame}
+
+
+% \begin{frame}
+% \frametitle{A Statistical Highlighter (With Many Colors) }
+
+
+% \scalebox{0.45}{\includegraphics{WallachHighlighter.png}}
+
+% \end{frame}
+
+
+
+% \begin{frame}
+% \frametitle{Vanilla Latent Dirichlet Allocation$\leadsto$ Objective Function}
+
+% \begin{itemize}
+% \item[-] Consider document $i$, $(i =1, 2, \hdots, N)$.
+% \invisible<1>{\item[-] Suppose there are $M_{i}$ total words and $\boldsymbol{x}_{i}$ is an $M_{i} \times 1$ vector, where $x_{im}$ describes the $m^{\text{th}}$ word used in the document$^{*}$.    }
+% \end{itemize}
+
+
+% \begin{eqnarray}
+% \invisible<1-6>{\boldsymbol{\theta}_{k} & \sim & \text{Dirichlet}(\boldsymbol{1}) \nonumber }\\
+% \invisible<1-7>{\alpha_{k} & \sim & \text{Gamma}(\alpha, \beta) \nonumber } \\
+% \invisible<1-3>{\boldsymbol{\pi}_{i}|\boldsymbol{\alpha} & \sim & \text{Dirichlet}(\boldsymbol{\alpha}) }\nonumber \\
+% \invisible<1-4>{\boldsymbol{\tau}_{im}| \boldsymbol{\pi}_{i} & \sim & \text{Multinomial}(1, \boldsymbol{\pi}_{i})} \nonumber \\
+% \invisible<1-5>{x_{im} | \boldsymbol{\theta}_{k}, \tau_{imk}=1 & \sim & \text{Multinomial}(1, \boldsymbol{\theta}_{k}) }\nonumber
+% \end{eqnarray}
+
+
+% \invisible<1-2, 4->{$^{*}$Notice: this is a different representation than a document-term matrix.  $x_{im}$ is a number that says which of the $J$ words are used.  The difference is for clarity and we'll this representation is closely related to document-term matrix}
+
+
+% \pause \pause \pause \pause \pause \pause \pause
+% \end{frame}
+
+
+% \begin{frame}
+% \frametitle{Vanilla Latent Dirichlet Allocation$\leadsto$ Objective Function}
+
+% Together the model implies the following posterior:
+
+% \begin{small}
+% \begin{eqnarray}
+% \invisible<1>{p(\boldsymbol{\pi}, \boldsymbol{T},\boldsymbol{\Theta}, \boldsymbol{\alpha}| \boldsymbol{X}) & \propto & \nonumber p(\boldsymbol{\alpha}) p(\boldsymbol{\pi}| \boldsymbol{\alpha}) p(\boldsymbol{T}| \boldsymbol{\pi}) p(\boldsymbol{X}| \boldsymbol{\theta}, \boldsymbol{T}) \nonumber } \\
+% \invisible<1-2>{& \propto & p(\boldsymbol{\alpha}) \prod_{i=1}^{N} \left[p(\boldsymbol{\pi}_{i} | \boldsymbol{\alpha}) \prod_{m=1}^{M_{i}} p(\boldsymbol{\tau}_{im}| \boldsymbol{\pi}) p(x_{im}| \boldsymbol{\theta}_{k}, \tau_{imk}=1) \right ] \nonumber }\\
+% \invisible<1-3>{& \propto & p(\boldsymbol{\alpha}) \prod_{i=1}^{N} \left[\alert<5>{\frac{\Gamma(\sum_{k=1}^{K} \alpha_{k})}{\prod_{k=1}^{K} \Gamma(\alpha_{k}) } \prod_{k=1}^{K} \pi_{ik}^{\alpha_{k}- 1}} \prod_{m=1}^{M}\prod_{k=1}^{K} \left[ \pi_{ik} \alert<6>{\prod_{j=1}^{J} \theta_{jk}^{x_{imj}} }  \right]^{\tau_{ikm}} \right] }\nonumber
+% \end{eqnarray}
+
+% \end{small}
+
+% \invisible<1-6>{Optimization:}
+% \begin{itemize}
+% \invisible<1-7>{\item[-] Variational Approximation$\leadsto$ Find ``closest" distribution}
+% \invisible<1-8>{\item[-] Gibbs sampling $\leadsto$ MCMC algorithm to approximate posterior}
+% \end{itemize}
+
+% \invisible<1-9>{\alert{Described in the slides appendix}}
+% \pause \pause \pause \pause \pause \pause \pause \pause \pause
+
+
+% \end{frame}
+
+
+% \begin{frame}
+% \frametitle{Why does this work$\leadsto$ Co-occurrence}
+
+
+% Where's the information for each word's topic? \pause \\
+
+% \invisible<1>{Reconsider document-term matrix} \pause
+
+% \begin{center}
+% \invisible<1-2>{\begin{tabular}{ccccc}
+% \hline
+%         & $\text{Word}_1$ & $\text{Word}_2$ & $\hdots$ & $\text{Word}_J$ \\
+% \hline
+% Doc$_{1}$  & 0   & 1    & $\hdots$ & 0 \\
+% Doc$_{2}$ & 2 & 0  & $\hdots$ & 3\\
+% $\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$ \\
+% Doc$_{N}$ & 0 & 1 & $\hdots$ & 1 \\
+% \hline\hline
+% \end{tabular}} \pause
+% \end{center}
+% \invisible<1-3>{Inner product of Documents (rows): $\textbf{Doc}_{i}^{'} \textbf{Doc}_{l} $} \pause \\
+% \vspace{0.1in}
+% \invisible<1-4>{Inner product of Terms (columns): $\textbf{Word}_j^{'} \textbf{Word}_k$ } \pause \\
+% \invisible<1-5>{\alert{Allows}: measure of correlation of term usage across documents (heuristically: partition words, based on usage in documents)} \pause \\
+% \invisible<1-6>{\alert{Latent Semantic Analysis}:  Reduce information in matrix using linear algebra (provides similar results, difficult to generalize)} \pause \\
+% \invisible<1-7>{\alert{Biclustering}: Models that partition documents and words simultaneously}
+
+% \end{frame}
+
+% \begin{frame}
+
+% {\tt R Code!}
+
+% \end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Types of Classification Problems}
+
+
+\alert{Topic}: What is this text about? \pause
+\invisible<1>{\begin{itemize}
+\item[-] Policy area of legislation  \\
+$\Rightarrow$ $\{$Agriculture, Crime, Environment, ...$\}$
+\item[-] Campaign agendas \\
+$\Rightarrow$ $\{$Abortion, Campaign, Finance, Taxing, ...       $\}$
+\end{itemize}} \pause
+
+\invisible<1-2>{\alert{Sentiment}: What is said in this text? [\alert{Public Opinion}] } \pause
+\invisible<1-3>{\begin{itemize}
+\item[-] Positions on legislation\\
+ $\Rightarrow$ $\{$ Support, Ambiguous, Oppose $\}$
+\item[-] Positions on Court Cases \\
+$\Rightarrow$ $\{$ Agree with Court, Disagree with Court $\}$
+\item[-] Liberal/Conservative Blog Posts \\
+$\Rightarrow$ $\{$ Liberal, Middle, Conservative, No Ideology Expressed $\}$
+\end{itemize} } \pause
+
+\invisible<1-4>{\alert{Style}/\alert{Tone}: How is it said?} \pause
+\invisible<1-5>{\begin{itemize}
+\item[-] Taunting in floor statements\\
+ $\Rightarrow$ $\{$ Partisan Taunt, Intra party taunt, Agency taunt, ... $\}$
+\item[-] Negative campaigning \\
+$\Rightarrow$ $\{$ Negative ad, Positive ad$\}$
+\end{itemize} }
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Pre-existing word weights$\leadsto$ Dictionaries}
+
+\invisible<1>{{\tt DICTION}}\\
+
+\invisible<1>{\only<2>{\scalebox{0.55}{\includegraphics{DICTION2.png}}}}
+\only<3>{\scalebox{0.55}{\includegraphics{DICTION3.png}}}
+\only<4>{\scalebox{0.55}{\includegraphics{DICTION4.png}}}
+\only<5>{\scalebox{0.85}{\includegraphics{DICTION5.png}}}
+\only<6>{\scalebox{0.85}{\includegraphics{DictionCost.png}}}
+
+\pause \pause \pause \pause \pause
+
+\end{frame}
+
+
+\begin{frame}
+
+\scalebox{0.75}{\includegraphics{Year.jpg}}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Dictionary Methods}
+
+
+Many Dictionary Methods (like DICTION) \pause
+
+\begin{itemize}
+\invisible<1>{\item[1)] Proprietary}\pause\invisible<1-2>{$\leadsto$ wrapped in GUI} \pause
+\invisible<1-3>{\item[2)] Basic tasks:} \pause
+\begin{itemize}
+\invisible<1-4>{\item[a)] Count words} \pause
+\invisible<1-5>{\item[b)] Weighted counts of words} \pause
+\invisible<1-6>{\item[c)] Some graphics}\pause
+\end{itemize}
+\invisible<1-7>{\item[3)] Pricey$\leadsto$ \alert{inexplicably}}
+\end{itemize}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{DICTION}
+
+
+
+\begin{columns}[]
+
+\column{0.5\textwidth}
+\scalebox{0.15}{\includegraphics{PolTone.jpg}}
+
+
+\column{0.5\textwidth}
+\pause
+\begin{itemize}
+\item[-] \invisible<1>{$\{$ Certain, Uncertain $\}$}\pause\invisible<1-2>{\\, $\{$ Optimistic, Pessimistic $\}$} \pause
+\item[-] \invisible<1-3>{$\approx$ 10,000 words} \pause
+\end{itemize}
+
+
+\invisible<1-4>{Applies DICTION to a wide array of political texts\\} \pause
+\invisible<1-5>{Examine specific periods of American political history}
+
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Other Dictionaries }
+
+
+\begin{itemize}
+\item[1)] General Inquirer Database (\url{http://www.wjh.harvard.edu/~inquirer/} ) \pause
+\begin{itemize}
+\invisible<1>{\item[-] Stone, P.J., Dumphy, D.C., and Ogilvie, D.M. (1966) \emph{The General Inquirer: A Computer Approach to Content Analysis}} \pause
+\invisible<1-2>{\item[-] $\{$ Positive, Negative $\}$ } \pause
+\invisible<1-3>{\item[-] 3627 negative and positive word strings } \pause
+\invisible<1-4>{\item[-] Workhorse for classification across many domains/papers} \pause
+\end{itemize}
+\invisible<1-5>{\item[2)] Linguistic Inquiry Word Count (LIWC)} \pause
+\begin{itemize}
+\invisible<1-6>{\item[-] Creation process:} \pause
+\begin{itemize}
+\invisible<1-7>{\item[1)] Generate word list for categories$\leadsto$ `` We drew on common emotion rating scales...Roget's Thesaurus...standard English dictionaries. [then] brain-storming sessions among 3-6 judges were held" to generate other words } \pause
+\invisible<1-8>{\item[2)] Judge round$\leadsto$ (a) Does the word belong? (b) What other categories might it belong to?} \pause
+\end{itemize}
+\invisible<1-9>{\item[-] $\{$ Positive emotion, Negative emotion $\}$} \pause
+\invisible<1-10>{\item[-] 2300 words grouped into 70 classes} \pause
+\end{itemize}
+\invisible<1-11>{\item[-] Harvard-IV-4 } \pause
+\invisible<1-12>{\item[-] Affective Norms for English Words (we'll discuss this more later)} \pause
+\invisible<1-13>{\item[-] ...}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Generating New Words}
+
+Three ways to create dictionaries (non-exhaustive): \pause
+\begin{itemize}
+\invisible<1>{\item[-] Statistical methods (Separating methods)} \pause
+\invisible<1-2>{\item[-] Manual generation } \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] Careful thought (prayer? epiphanies? divine intervention?) about useful words} \pause
+\end{itemize}
+\invisible<1-4>{\item[-] Populations of people who are surprisingly willing to perform ill-defined tasks} \pause
+\begin{itemize}
+\invisible<1-5>{\item[a)] Undergraduates$:\text{Pizza}\rightarrow \text{Research Output}$} \pause
+\invisible<1-6>{\item[b)] Mechanical turkers} \pause
+\begin{itemize}
+\invisible<1-7>{\item[-] Example: $\{$ Happy, Unhappy $\}$ } \pause
+\invisible<1-8>{\item[-] Ask turkers: how happy is } \pause
+\invisible<1-9>{\item[] {\tt elevator}, {\tt car}, {\tt pretty}, {\tt young} } \pause
+\invisible<1-10>{\item[] Output as dictionary}
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Applying Methods to Documents}
+
+Applying the model: \pause
+\begin{itemize}
+\invisible<1>{\item[-] Vector of word counts:  $\boldsymbol{X}_i = (X_{i1}, X_{i2}, \hdots, X_{iK})$, $(i = 1, \hdots, N)$} \pause
+\invisible<1-2>{\item[-] Weights attached to words  $\boldsymbol{\theta} = (\theta_{1}, \theta_{2}, \hdots, \theta_{K})$  } \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] $\theta_{k} \in \{0,1\}$} \pause
+\invisible<1-4>{\item[-] $\theta_{k} \in \{-1, 0, 1 \}$} \pause
+\invisible<1-5>{\item[-] $\theta_{k} \in \{-2, -1, 0, 1, 2\}$} \pause
+\invisible<1-6>{\item[-] $\theta_{k} \in \Re$} \pause
+\end{itemize}
+\end{itemize}
+
+\invisible<1-7>{For each document $i$ calculate score for document } \pause
+\begin{eqnarray}
+\invisible<1-8>{Y_i  & = &  \frac{\sum_{k=1}^{K} \theta_k X_{ik}}{\sum_{k=1}^{K} X_{k}} \nonumber \\} \pause
+\invisible<1-9>{Y_i  & = &  \frac{\boldsymbol{\theta}^{'} \boldsymbol{X}_i}{\boldsymbol{X}_{i}^{'} \boldsymbol{1} } \nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-10>{$Y_{i} \approx $ continuous $\leadsto$ Classification} \pause
+\begin{itemize}
+\invisible<1-11>{\item[] $Y_i> 0 \Rightarrow$ Positive Category} \pause
+\invisible<1-12>{\item[] $Y_i< 0 \Rightarrow$ Negative Category} \pause
+\invisible<1-13>{\item[] $Y_i \approx 0$ Ambiguous}
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Applying a Dictionary to Press Releases}
+
+\pause
+\begin{itemize}
+\invisible<1>{\item[-] Collection of 169,779 press releases (US House members 2005-2010)} \pause
+\invisible<1-2>{\item[-] Dictionary from Neal Caren's website $\leadsto$ Theresa Wilson, Janyce Wiebe, and Paul Hoffman's dictionary } \pause
+\invisible<1-3>{\item[-] Create positive/negative score for press releases.  }
+\end{itemize}
+
+
+
+
+
+
+\invisible<1-4>{{\tt Python} code and press releases}
+
+\pause
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Examining Positive and Negative Statements in Press Releases}
+
+\pause
+
+\only<1-10>{
+\invisible<1>{Least positive members of Congress:}
+\begin{itemize}
+\invisible<1-2>{\item[1)] Dan Burton, 2008}
+\invisible<1-3>{\item[2)] Nancy Pelosi, 2007}
+\invisible<1-4>{\item[3)] Mike Pence 2007}
+\invisible<1-5>{\item[4)] John Boehner, 2009}
+\invisible<1-6>{\item[5)] Jeff Flake, (basically all years)}
+\invisible<1-7>{\item[6)] Eric Cantor, 2009}
+\invisible<1-8>{\item[7)] Tom Price, 2010}
+\end{itemize}
+
+\invisible<1-9>{Legislators who are more extreme$\leadsto$ less positive in press releases}
+
+}
+
+
+\only<11>{\scalebox{0.5}{\includegraphics{pressOverTime.pdf}}}
+
+\only<12-13>{
+\begin{itemize}
+\item[-] Credit Claiming press release: 9.1 percentage points ``more positive" than a non-credit claiming press release
+\invisible<1-12>{\item[-] Anti-spending press release: 10.6 percentage points ``less positive" than a non-anti spending press release}
+\end{itemize}
+}
+
+\only<14>{\scalebox{0.5}{\includegraphics{CreditPositive.pdf}}}
+\only<15->{\scalebox{0.5}{\includegraphics{AntiCreditPositive.pdf}}}
+
+
+
+
+
+
+\pause \pause \pause \pause \pause\pause \pause \pause \pause \pause \pause \pause \pause \pause
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Methodological Issues/Problems with Dictionaries}
+
+\alert{Dictionary methods are context invariant} \pause \\
+\begin{itemize}
+\invisible<1>{\item[-] No optimization step $\leadsto$ same word weights regardless of texts} \pause
+\invisible<1-2>{\item[-] Optimization$\leadsto$ incorporate information specific to context} \pause
+\invisible<1-3>{\item[-] Without optimization$\leadsto$ unclear about dictionaries performance} \pause
+\end{itemize}
+
+
+
+\invisible<1-4>{\alert{Just because dictionaries provide measures labeled ``positive" or ``negative" it doesn't mean they are accurate measures in your text} (!!!!) \\} \pause
+
+\vspace{0.5in}
+
+\invisible<1-5>{{\huge \alert{Validation}}}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Validation}
+
+Classification Validity: \pause
+\begin{itemize}
+\invisible<1>{\item[-] \alert{Training}: build dictionary on subset of documents \alert{with known labels}} \pause
+\invisible<1-2>{\item[-] \alert{Test}: apply dictionary method to other documents \alert{with known labels}} \pause
+\invisible<1-3>{\item[-] Requires hand coded documents} \pause
+\invisible<1-4>{\item[-] Hand coded documents useful for other reasons} \pause
+\begin{itemize}
+\invisible<1-5>{\item[-] Is the classification scheme well defined for your texts?} \pause
+\invisible<1-6>{\item[-] Can humans accomplish the coding task?} \pause
+\invisible<1-7>{\item[-] Is the dictionary your using appropriate?} \pause
+\end{itemize}
+\end{itemize}
+
+\large
+\invisible<1-8>{\alert{Replicate} classification exercise}  \pause
+\normalsize
+\begin{itemize}
+\invisible<1-9>{\item[-] How well does our method perform on \alert{held out} documents?} \pause
+\invisible<1-10>{\item[-] Why held out?} \pause \invisible<1-11>{\alert{Over fitting} } \pause
+\invisible<1-12>{\item[-] Using off-the-shelf dictionary: all labeled documents to test} \pause
+\invisible<1-13>{\item[-] Supervised learning classification: \alert{(Cross)validation} }
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Hand Coding: A Brief Digression}
+
+\alert{Humans should be able to classify documents into the categories you want the machine to classify them in} \pause
+\begin{itemize}
+\invisible<1>{\item[-] This is \alert{hard}} \pause
+\invisible<1-2>{\item[-] Why? } \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] Ambiguity in language} \pause
+\invisible<1-4>{\item[-] Limited working memory} \pause
+\invisible<1-5>{\item[-] Ambiguity in classification rules} \pause
+\end{itemize}
+\invisible<1-6>{\item[-] A procedure for training coders: } \pause
+\invisible<1-7>{\begin{itemize}
+\item[1)] Coding rules
+\item[2)] Apply to new texts
+\item[3)] Assess coder agreement (we'll discuss more in a few weeks)
+\item[4)] Using information and discussion, revise coding rules
+\end{itemize}}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Assessing Classification}
+
+Measures of classification performance
+
+\begin{tabular}{l|l|l}
+ \hline
+  & \multicolumn{2}{c}{Actual Label}  \\
+  \hline
+  Guess &   Liberal & Conservative \\
+  \hline
+  Liberal &  \alert{True Liberal} & False Liberal \\
+  \hline
+  Conservative & False Conservative & \alert{True Conservative} \\
+  \hline
+  \hline
+\end{tabular}
+
+\pause
+\begin{eqnarray}
+\invisible<1>{\text{Accuracy} & = & \frac{ \alert{\text{TrueLib} }+ \alert{\text{TrueCons}}  } { \alert{\text{TrueLib} } + \alert{\text{TrueCons}} + \text{FalseLib} + \text{FalseCons} } \nonumber } \pause  \\
+\invisible<1-2>{\text{Precision}_{\text{Liberal}} &= &   \frac{ \alert{\text{True Liberal}}    }  { \alert{\text{True Liberal }} + \text{False Liberal}      } } \pause  \nonumber \\
+\invisible<1-3>{\text{Recall}_{\text{Liberal} } & = & \frac{ \alert{\text{True Liberal}}   } { \alert{\text{True Liberal}} + \text{False Conservative}   } } \pause  \nonumber \\
+\invisible<1-4>{F_{\text{Liberal}} & = & \frac{ 2\text{Precision}_{\text{Liberal}} \text{Recall}_{\text{Liberal} } } { \text{Precision}_{\text{Liberal}} +  \text{Recall}_{\text{Liberal} }} }   \nonumber \pause
+\end{eqnarray}
+
+\invisible<1-5>{\alert{Under reported for dictionary classification} }
+\end{frame}
+
+
+\begin{frame}
+\frametitle{What about continuous measures?}
+
+\pause
+
+\invisible<1>{\alert{Necessarily more complicated}\\} \pause
+
+\begin{itemize}
+\invisible<1-2>{\item[-] Go back to hand coding exercise} \pause
+\invisible<1-3>{\item[-] Imagine asking undergraduates to rate document on a continuous scale (0-100)} \pause
+\invisible<1-4>{\item[-] \alert{Difficult} to create classifications with agreement} \pause
+\invisible<1-5>{\item[-] \alert{Precisely} the point$\leadsto$ merely creating a gold standard is hard, let alone computer classification} \pause
+\end{itemize}
+
+\invisible<1-6>{\alert{Lower level classification}}\pause\invisible<1-7>{$\leadsto$ label phrases and then aggregate} \pause \\
+
+\invisible<1-8>{Modifiable areal unit problem in texts}\pause$\leadsto$\invisible<1-9>{aggregating destroys information, conclusion may depend on level of aggregation}
+
+
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Validation, Dictionaries from other Fields}
+\pause
+\invisible<1>{Accounting Research: measure \alert{tone} of \alert{10-K} reports} \pause
+\begin{itemize}
+%\item[-] Comprehensive public summary of company performance
+\invisible<1-2>{\item[-] \alert{tone} matters (\$)} \pause
+\end{itemize}
+
+\invisible<1-3>{Previous state of art: Harvard-IV-4 Dictionary applied to texts} \\
+\invisible<1-4>{Loughran and McDonald (2011): \alert{Financial Documents are Different}, \textcolor{blue}{polysemes} } \pause
+\begin{itemize}
+\invisible<1-5>{\item[-] Negative words in Harvard, Not Negative in Accounting: \\} \pause
+\invisible<1-6>{{\tt tax, cost, capital, board, liability, foreign,  cancer, crude (oil), tire } } \pause
+\invisible<1-7>{\item[-] \alert{73\%} of Harvard negative words in this set(!!!!!)} \pause
+\invisible<1-8>{\item[-] Not Negative Harvard, Negative in Accounting: \\} \pause
+\invisible<1-9>{{\tt felony, litigation, restated, misstatement, unanticipated} } \pause
+\end{itemize}
+
+
+\large
+\invisible<1-10>{\alert{Context Matters}}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Measuring Happiness}
+
+\begin{columns}[]
+\column{0.5\textwidth}
+\scalebox{0.35}{\includegraphics{Bentham.jpg}}
+
+\column{0.5\textwidth}
+
+\pause
+\begin{itemize}
+\invisible<1>{\item[-] Quantifying Happiness: How happy is society?} \pause
+\invisible<1-2>{\item[-] How Happy is a Song?} \pause
+\invisible<1-3>{\item[-] Blog posts?} \pause
+\invisible<1-4>{\item[-] Facebook posts? (Gross National Happiness)} \pause
+\end{itemize}
+
+\invisible<1-5>{Use \alert{Dictionary Methods} }
+
+\end{columns}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Measuring Happiness}
+
+Dodds and Danforth (2009): Use a dictionary method to measure happiness \pause
+\begin{itemize}
+\invisible<1>{\item[-]  \alert{Affective Norms for English Words} (ANEW)} \pause
+\invisible<1-2>{\item[-] Bradley and Lang 1999:  1034 words, Affective reaction to words} \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] On a scale of 1-9 how happy does this word make you?} \pause
+\invisible<1-4>{\item[] \alert{Happy} : triumphant (8.82)/paradise (8.72)/ love (8.72) } \pause
+\invisible<1-5>{\item[] \alert{Neutral}: street (5.22)/ paper (5.20)/ engine (5.20) } \pause
+\invisible<1-6>{\item[] \alert{Unhappy} : cancer (1.5)/funeral (1.39)/ rape (1.25) /suicide (1.25) } \pause
+\end{itemize}
+\invisible<1-7>{\item[-] \alert{Happiness} for text $i$ (with word $j$ having happiness $\theta_j$ and document frequence $X_{ij}$)} \pause
+\begin{eqnarray}
+\invisible<1-8>{\text{Happiness}_{i}  & = & \frac{ \sum_{k=1}^{K} \theta_{k} X_{ik} } { \sum_{k=1}^{K} X_{ik}} }  \nonumber
+\end{eqnarray}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+
+
+
+\scalebox{0.5}{\includegraphics{BillyJean.png}}
+\pause
+
+
+\invisible<1>{\alert{Homework Hints}:}
+\invisible<1>{One approach: write a {\tt for} loop searching for words in dictionary (caution: is dictionary stemmed?) }\\ \pause
+\invisible<1-2>{Happiest Song on Thriller?}  \\ \pause
+\invisible<1-3>{\alert{P.Y.T. (Pretty Young Thing) }   (This is the right answer!)}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Happiness in Society}
+
+\only<1>{\scalebox{1}{\includegraphics{SongHappiness.png}}}
+\only<2>{\scalebox{1}{\includegraphics{SongType.png}}}
+\only<3>{\scalebox{0.7}{\includegraphics{Blog.png}}}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Supervised Learning}
+
+\invisible<1>{Supervised Methods: } \pause
+\begin{itemize}
+\invisible<1-2>{\item[-] Models for \alert{categorizing texts}} \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] Know (develop) categories before hand} \pause
+\invisible<1-4>{\item[-] Hand coding: assign documents to categories
+\item[-] Infer: new document assignment to categories (distribution of documents to categories)} \pause
+\invisible<1-5>{\item[-] \alert{Pre-estimation}: extensive work constructing categories, building classifiers
+\item[-] \alert{Post-estimation}: relatively little work}
+\end{itemize}
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Supervised Learning}
+
+\pause
+\begin{itemize}
+\invisible<1>{\item[-] How to generate \alert{valid} hand coding categories} \pause
+\begin{itemize}
+\invisible<1-2>{\item[-] Assessing coder performance
+\item[-] Assessing disagreement among coders
+\item[-] Evidence coders perform well} \pause
+\end{itemize}
+\invisible<1-3>{\item[-] Supervised Learning Methods: \alert{Naive Bayes}, \alert{LASSO} (Ridge), \alert{ReadMe} } \pause
+\invisible<1-4>{\item[-] Assessing Model Performance}  \pause
+\end{itemize}
+
+
+\invisible<1-5>{\alert{Methods generalize beyond text} }
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Components to Supervised Learning Method}
+
+
+ \pause
+\begin{itemize}
+\invisible<1>{\item[1)] Set of \alert{categories}  } \pause
+\begin{itemize}
+\invisible<1-2>{\item[-] Credit Claiming, Position Taking, Advertising
+\item[-] Positive Tone, Negative Tone
+\item[-] Pro-war, Ambiguous, Anti-war} \pause
+\end{itemize}
+\invisible<1-3>{\item[2)] Set of \alert{hand-coded} documents } \pause
+\begin{itemize}
+\invisible<1-4>{\item[-] Coding done by human coders
+\item[-] \alert{Training} Set: documents we'll use to learn how to code
+\item[-] \alert{Validation} Set: documents we'll use to learn how well we code } \pause
+\end{itemize}
+\invisible<1-5>{\item[3)] Set of \alert{unlabeled} documents} \pause
+\invisible<1-6>{\item[4)] Method to extrapolate from hand coding to unlabeled documents}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Three categories of documents}
+
+\alert{Hand labeled}
+\begin{itemize}
+\item[-] Training set (what we'll use to estimate model)
+\item[-] Validation set (what we'll use to assess model)
+\end{itemize}
+\alert{Unlabeled}
+\begin{itemize}
+\item[-] Test set (what we'll use the model to categorize)
+\end{itemize}
+
+\alert{Label more documents than necessary to train model}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Regression models}
+
+Suppose we have $N$ documents, with each document $i$ having label $y_{i} \in \{-1, 1\}\leadsto\{$not, credit claiming$\}$ \pause \\
+\invisible<1>{We represent each document $i$ is $\boldsymbol{x}_{i} = (x_{i1}, x_{i2}, \hdots, x_{iJ})$. } \pause  \\
+
+\begin{eqnarray}
+\invisible<1-2>{f(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y})  & = & \sum_{i=1}^{N}\left( y_{i} - \boldsymbol{\beta}^{'} \boldsymbol{x}_{i} \right)^{2}  \nonumber \\} \pause
+\invisible<1-3>{\widehat{\boldsymbol{\beta} } & = & \text{arg min}_{\boldsymbol{\beta}} \left\{\sum_{i=1}^{N}\left( y_{i} - \boldsymbol{\beta}^{'} \boldsymbol{x}_{i} \right)^{2}\right\} \nonumber \\} \pause
+ \invisible<1-4>{& = & \left( \boldsymbol{X}^{'}\boldsymbol{X}   \right)^{-1}\boldsymbol{X}^{'}\boldsymbol{Y} \nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-5>{Problem: \\} \pause
+\begin{itemize}
+\invisible<1-6>{\item[-] $J$ will likely be large (perhaps $J> N$)} \pause
+\invisible<1-7>{\item[-] There many correlated variables} \pause
+\end{itemize}
+
+\invisible<1-8>{Predictions will be \alert{variable}}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Mean Square Error}
+Suppose $\theta$ is some value of the true parameter \pause \\
+\invisible<1>{Bias: \\} \pause
+\begin{eqnarray}
+\invisible<1-2>{\text{Bias} & = & E[\widehat{\theta} - \theta]\nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-3>{We may care about average distance from truth} \pause
+
+\begin{eqnarray}
+\invisible<1-4>{\text{E}[(\hat{\theta} - \theta)^{2}]}\pause\invisible<1-5>{ & = & E[\hat{\theta}^{2}]  - 2 \theta E[\hat{\theta}] + \theta^2 } \pause \nonumber \\
+ \invisible<1-6>{& = &  E[\hat{\theta}^{2}] - E[\hat{\theta}]^{2} + E[\hat{\theta}]^{2}- 2 \theta E[\hat{\theta}] + \theta^2} \pause  \nonumber \\
+\invisible<1-7>{& = & E[\hat{\theta}^{2}] - E[\hat{\theta}]^{2} +  (E[\widehat{\theta} - \theta])^2 } \pause \nonumber \\
+  \invisible<1-8>{& = & \text{Var}(\hat{\theta}) + \text{Bias}^{2} } \pause \nonumber
+\end{eqnarray}
+
+\invisible<1-9>{To reduce MSE, we are willing to induce bias to decrease variance$\leadsto$ methods that \alert{shrink} coefficeints toward zero}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ridge Regression}
+
+Penalty for model complexity \pause
+
+\begin{eqnarray}
+\invisible<1>{f(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y} ) }\pause \invisible<1-2>{& = & \sum_{i=1}^{N} \left(y_{i} - \
+\beta_{0} - \sum_{j=1}^{J}\beta_{j} x_{ij}\right)^{2} } \pause \invisible<1-3>{ + \underbrace{\lambda \sum_{j=1}^{J} \beta_{j}^{2}}_{\text{Penalty}} } \pause \nonumber
+\end{eqnarray}
+
+\invisible<1-4>{where:} \pause
+
+\begin{itemize}
+\invisible<1-5>{\item[-] $\beta_{0}\leadsto$ intercept} \pause
+\invisible<1-6>{\item[-] $\lambda\leadsto$ penalty parameter} \pause
+\invisible<1-7>{\item[-] Standardized $\boldsymbol{X}$ (coefficients on same scale)}
+\end{itemize}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Ridge Regression$\leadsto$ Optimization}
+
+\begin{eqnarray}
+\boldsymbol{\beta}^{\text{Ridge}} & = & \text{arg min}_{\boldsymbol{\beta}} \left\{f(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y})\right\} \nonumber  \pause \\
+\invisible<1>{& = & \text{arg min}_{\boldsymbol{\beta}} \left\{\sum_{i=1}^{N} \left(y_{i} - \beta_{0} - \sum_{j=1}^{J}\beta_{j} x_{ij}\right)^{2}  + \lambda \sum_{j=1}^{J} \beta_{j}^{2}\right\} } \pause \nonumber \\
+ \invisible<1-2>{& = & \text{arg min}_{\boldsymbol{\beta}} \left\{ (\boldsymbol{Y} - \boldsymbol{X}^{'} \boldsymbol{\beta})^{'}(\boldsymbol{Y} - \boldsymbol{X}^{'} \boldsymbol{\beta}) + \lambda \boldsymbol{\beta}^{'}\boldsymbol{\beta} \right\} } \nonumber \\
+\invisible<1-3>{& = & \left(\boldsymbol{X}^{'}\boldsymbol{X} + \lambda \boldsymbol{I}_{J}     \right)^{-1} \boldsymbol{X}^{'} \boldsymbol{Y} } \nonumber
+\end{eqnarray}
+
+\invisible<1-2>{Demean the data and set $\beta_{0} = \bar{y} = \sum_{i=1}^{N} \frac{y_{i}}{N}$ }
+\pause \pause
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ridge Regression$\leadsto$ Intuition (1)}
+
+
+Suppose $\boldsymbol{X}^{'}\boldsymbol{X} = \boldsymbol{I}_{J}$.  \pause
+\begin{eqnarray}
+\invisible<1>{\widehat{\boldsymbol{\beta}} & = & \left(\boldsymbol{X}^{'}\boldsymbol{X}\right)^{-1} \boldsymbol{X}^{'}\boldsymbol{Y} \nonumber} \pause  \\
+ \invisible<1-2>{& = & \boldsymbol{X}^{'}\boldsymbol{Y} } \pause \nonumber \\
+ \invisible<1-3>{\boldsymbol{\beta}^{\text{ridge}} & = & \left(\boldsymbol{X}^{'}\boldsymbol{X} + \lambda \boldsymbol{I}_{J}     \right)^{-1} \boldsymbol{X}^{'} \boldsymbol{Y} \nonumber } \pause \\
+  \invisible<1-4>{&= & \left(\boldsymbol{I}_{j} + \lambda \boldsymbol{I}_{j} \right)^{-1} \boldsymbol{X}^{'}\boldsymbol{Y} \nonumber} \pause  \\
+   \invisible<1-5>{&= & \left(\boldsymbol{I}_{j} + \lambda \boldsymbol{I}_{j} \right)^{-1} \widehat{\boldsymbol{\beta}} \nonumber } \pause \\
+ \invisible<1-6>{\beta_{j}^{\text{Ridge}} & =  & \frac{\widehat{\beta}_{j}}{1 + \lambda} \nonumber }
+\end{eqnarray}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Ridge Regression$\leadsto$ Intuition (2)}
+
+\begin{eqnarray}
+\boldsymbol{\beta}_{j} & \sim & \text{Normal}(0, \tau^{2}) \nonumber \\
+y_{i} & \sim & \text{Normal}(\beta_{0} + \boldsymbol{x}_{i}^{'}\boldsymbol{\beta}, \sigma^{2}) \nonumber
+\end{eqnarray}
+
+
+\pause
+\begin{small}
+\begin{eqnarray}
+\invisible<1>{p(\boldsymbol{\beta}| \boldsymbol{X}, \boldsymbol{Y})  & \propto & \prod_{j=1}^{J} p(\beta_{j}) \prod_{i=1}^{N} p(y_{i}| \boldsymbol{x}_{i}, \boldsymbol{\beta}) \nonumber} \pause  \\
+\invisible<1-2>{& \propto &   \prod_{j=1}^{J}\frac{1}{\sqrt{2 \pi} \tau } \exp\left( - \frac{\beta_{j}^2}{2 \tau^2 }  \right) \prod_{i=1}^{N} \frac{1}{\sqrt{2\pi} \sigma} \exp\left( - \frac{ (y_{i} - \beta_{0} - \boldsymbol{x}^{'}_{i} \boldsymbol{\beta})^{2}  }{2 \sigma^2 }   \right) } \nonumber
+\end{eqnarray}
+\end{small}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ridge Regression$\leadsto$ Intuition (2)}
+
+\begin{eqnarray}
+\log p(\boldsymbol{\beta}| \boldsymbol{X}, \boldsymbol{Y}) & = &  - \sum_{j=1}^{J} \frac{\beta_{j}^2}{2 \tau^2 } - \sum_{i=1}^{N} \frac{ (y_{i} - \beta_{0} - \boldsymbol{x}^{'} \boldsymbol{\beta})^{2}  }{2 \sigma^2 } \nonumber \pause \\
+\invisible<1>{- 2 \sigma^2\log p(\boldsymbol{\beta}| \boldsymbol{X}, \boldsymbol{Y}) & = &   \sum_{i=1}^{N} (y_{i} - \beta_{0} - \boldsymbol{x}^{'} \boldsymbol{\beta})^{2} + \sum_{j=1}^{J} \frac{\sigma^2}{\tau^2} \beta_{j}^2  } \pause  \nonumber
+\end{eqnarray}
+
+\invisible<1-2>{where:} \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] $\lambda = \frac{\sigma^2}{\tau^2} $}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ridge Regression $\leadsto$ Intuition (3) }
+
+\begin{defn}
+Suppose $\boldsymbol{X}$ is an $N \times J$ matrix.  Then $\boldsymbol{X}$ can be written as:
+
+\begin{eqnarray}
+\boldsymbol{X} & =& \underbrace{\boldsymbol{U}}_{N \times N} \underbrace{\boldsymbol{S}}_{N \times J} \underbrace{\boldsymbol{V}^{'}}_{J \times J} \nonumber
+\end{eqnarray}
+
+Where:
+\begin{eqnarray}
+\boldsymbol{U}^{'}\boldsymbol{U} & = & \boldsymbol{I}_{N} \nonumber \\
+\boldsymbol{V}^{'}\boldsymbol{V} & = & \boldsymbol{V}\boldsymbol{V}^{'} = \boldsymbol{I}_{J} \nonumber
+\end{eqnarray}
+$\boldsymbol{S}$ contains $\min(N, J)$ singular values, $\sqrt{\lambda_{j}}\geq 0$ down the diagonal and then 0's for the remaining entries
+\end{defn}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Ridge Regression $\leadsto$ Intuition (3) }
+
+\begin{small}
+Recall: PCA:
+\begin{eqnarray}
+\frac{1}{N} \boldsymbol{X}^{'}\boldsymbol{X} = \underbrace{\boldsymbol{W}}_{\text{eigenvectors}} \begin{pmatrix} \lambda_{1} & 0 & \hdots & 0 \\
+      0     & \lambda_{2} & \hdots & 0 \\
+      \vdots  & \vdots     & \ddots & \vdots \\
+      0       & 0     & \hdots   & \lambda_{J}\\
+      \end{pmatrix}
+      \underbrace{ \boldsymbol{W}^{'}}_{\text{eigenvectors}}   \nonumber
+      \end{eqnarray} \pause
+
+\invisible<1>{Using SVD:} \pause
+
+\begin{eqnarray}
+\invisible<1-2>{\frac{1}{N} \boldsymbol{X}^{'}\boldsymbol{X} & = & \boldsymbol{V} \boldsymbol{S}^{'}\underbrace{\left(\boldsymbol{U}^{'}\boldsymbol{U}\right)}_{\boldsymbol{I}_{J}} \boldsymbol{S} \boldsymbol{V}^{'} \nonumber } \pause \\
+\invisible<1-3>{&  = & \frac{1}{N} \boldsymbol{V} \boldsymbol{S}^{'} \boldsymbol{S} \boldsymbol{V}^{'} \nonumber } \pause \\
+\invisible<1-4>{& = &   \underbrace{\boldsymbol{V}}_{\text{eigenvectors}} \begin{pmatrix} \lambda_{1} & 0 & \hdots & 0 \\
+      0     & \lambda_{2} & \hdots & 0 \\
+      \vdots  & \vdots     & \ddots & \vdots \\
+      0       & 0     & \hdots   & \lambda_{J}\\
+      \end{pmatrix} \underbrace{\boldsymbol{V}^{'}}_{\text{eigenvectors}} \nonumber }
+\end{eqnarray}
+
+\end{small}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ridge Regression $\leadsto$ Intuition (3) }
+\begin{footnotesize}
+We can write the predicted values for a regular regression as
+\begin{eqnarray}
+\hat{Y} & = & \boldsymbol{X} \hat{\boldsymbol{\beta}} \nonumber \\
+    & = & \boldsymbol{X} \left(\boldsymbol{X}^{'}\boldsymbol{X} \right)^{-1}\boldsymbol{X}^{'} \boldsymbol{Y} \nonumber \\
+    & = & \boldsymbol{U} \boldsymbol{U}^{'}\boldsymbol{Y}  = \sum_{j=1}^{J} \boldsymbol{u}_{j} \boldsymbol{u}_{j}^{'} \boldsymbol{Y} \nonumber
+\end{eqnarray}
+\pause
+
+\invisible<1>{We can write $\boldsymbol{\beta}^{\text{ridge}}$ as} \pause
+\begin{eqnarray}
+\invisible<1-2>{\hat{Y}^{\text{ridge}}& = & \boldsymbol{X}\left(\boldsymbol{X}^{'}\boldsymbol{X} + \lambda \boldsymbol{I}_{J}    \right)^{-1}\boldsymbol{X}^{'}\boldsymbol{Y} \nonumber } \pause \\
+\invisible<1-3>{& = & \boldsymbol{U} \tilde{\boldsymbol{S}} \boldsymbol{U}^{'}\boldsymbol{Y} \nonumber }
+\end{eqnarray}
+
+
+
+\invisible<1-3>{Where
+\begin{eqnarray}
+\tilde{\boldsymbol{S}} &= & \left[\boldsymbol{S}(\boldsymbol{S}^{'}\boldsymbol{S} + \lambda \boldsymbol{I}_{J})^{-1} \boldsymbol{S} \right] \nonumber
+\end{eqnarray}}
+
+\pause
+
+\invisible<1-4>{Which we can write as:
+\begin{eqnarray}
+\hat{Y}^{\text{ridge}}& = & \sum_{j=1}^{J} \boldsymbol{u}_{j} \frac{\lambda_{j}}{\lambda_{j} + \lambda} \boldsymbol{u}_{j}^{'} \boldsymbol{Y} \nonumber
+\end{eqnarray}}
+
+
+\end{footnotesize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Degrees of Freedom for Ridge}
+
+We will say that the degrees of freedom for Ridge regression with penalty $\lambda$ is
+\begin{eqnarray}
+\text{dof}(\lambda ) & = & \sum_{j=1}^{J} \frac{\lambda_{j}}{\lambda_{j} + \lambda} \nonumber
+\end{eqnarray}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Lasso Regression Objective Function}
+
+Different Penalty for Model Complexity
+
+\begin{eqnarray}
+f(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y} ) & = & \sum_{i=1}^{N} \left(y_{i} - \beta_{0} - \sum_{j=1}^{J} \beta_{j} x_{ij}  \right)^{2} + \lambda \sum_{j=1}^{J} \underbrace{|\beta_{j}|}_{\text{Penalty}} \nonumber \pause
+\end{eqnarray}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Lasso Regression Optimization}
+
+\begin{defn}
+\alert{Coordinate Descent Algorithms: } \\
+Consider $g:\Re^{J} \rightarrow \Re$.  Our goal is to find $\boldsymbol{x}^{*} \in \Re^{J}$ such that $g(\boldsymbol{x}^{*}) \leq g(\boldsymbol{x})$ for all $\boldsymbol{x} \in \Re$. \\
+
+To find $\boldsymbol{x}^{*}$:
+
+
+Until convergence: for each iteration $t$ and each coordinate $j$
+
+\begin{eqnarray}
+x_{j}^{t + 1} & = & \text{arg min}_{x_{j} \in \Re}g(x_{1}^{t +1}, x_{2}^{t + 1}, \hdots, x_{j-1}^{t+1}, x_{j}, x_{j+1}^{t}, \hdots, x_{J}^{t}) \nonumber
+\end{eqnarray}
+
+\end{defn}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Lasso Regression Optimization: Coordinate Descent}
+
+
+\begin{eqnarray}
+ \tilde{f}(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y} ) & = & \frac{1}{2N} \sum_{i=1}^{N} \left(y_{i} - \beta_{0} - \sum_{j=1}^{J} \beta_{j} x_{ij}  \right)^{2} + \lambda \sum_{j=1}^{J} |\beta_{j}| \nonumber \pause
+\end{eqnarray}
+
+\begin{itemize}
+\invisible<1>{\item[-] \alert{Case 1}: If $\beta_{j} = 0 \leadsto $ not differentiable. But $\beta_{j} = 0$} \pause
+\invisible<1-2>{\item[-] \alert{Case 2}: If $ \beta_{j}>(<) 0 \leadsto$ differentiable $\leadsto$ differentiate and solve for $\beta_{j}$ } \pause
+\end{itemize}
+
+\invisible<1-3>{Define $\tilde{y}_{i}^{j} = \beta_{0} + \sum_{l \neq j} x_{il} \beta_{l} $ \\} \pause
+
+\invisible<1-4>{$r^{j} \equiv  \frac{1}{N} \sum_{i=1}^{N} x_{ij}(y_{i} - \tilde{y}_{i}^{j} )$} \pause
+
+
+\invisible<1-5>{Update step for $\beta_{j}$ is } \pause
+
+\begin{eqnarray}
+\invisible<1-6>{\beta_{j} & \leftarrow  & \text{sign}(r^{j})\text{max}(|r^{j}| - \lambda, 0 ) \nonumber }
+\end{eqnarray}
+
+
+
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Lasso Regression$\leadsto$ Intuition 1, Soft Thresholding}
+
+Suppose again $\boldsymbol{X}^{'}\boldsymbol{X} = \boldsymbol{I}_{J}$ \pause
+
+\begin{eqnarray}
+\invisible<1>{f(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y} ) & = & \left(Y - \boldsymbol{X}\boldsymbol{\beta} \right)^{'}\left(Y - \boldsymbol{X}\boldsymbol{\beta} \right)  + \lambda \sum_{j=1}^{J}| \beta_{j}| \nonumber \\} \pause
+ \invisible<1-2>{& = & - 2 \boldsymbol{X}^{'}\boldsymbol{Y} \boldsymbol{\beta} + \boldsymbol{\beta}^{'}\boldsymbol{\beta} + \lambda  \sum_{j=1}^{J}| \beta_{j}| } \pause  \nonumber
+\end{eqnarray}
+
+\invisible<1-3>{The coefficient is } \pause
+\begin{eqnarray}
+\invisible<1-4>{\beta_{j}^{\text{LASSO}} & = & \text{sign}\left(\widehat{\beta}_{j}\right) \left(|\widehat{\beta}_{j}| - \lambda  \right)_{+} \nonumber } \pause
+\end{eqnarray}
+
+\begin{itemize}
+\invisible<1-5>{\item[-] $\text{sign}(\cdot) \leadsto$ $1$ or $-1$} \pause
+\invisible<1-6>{\item[-] $\left( |\widehat{\beta}_{j}| - \lambda \right)_{+} = \text{max}( |\widehat{\beta}_{j}| - \lambda, 0 )$}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Lasso Regression$\leadsto$ Intuition 1, Soft Thresholding}
+
+
+Compare soft assignment \pause
+\begin{eqnarray}
+\invisible<1>{\beta_{j}^{\text{LASSO}} & = & \text{sign}\left(\widehat{\beta}_{j}\right) \left(|\widehat{\beta}_{j}| - \lambda  \right)_{+} } \pause \nonumber
+\end{eqnarray}
+
+\invisible<1-2>{With hard assignment, selecting $M$ biggest components} \pause
+\begin{eqnarray}
+\invisible<1-3>{\beta_{j}^{\text{subset}} & = & \widehat{\beta}_{j} \cdot I\left(|\widehat{\beta}_{j}| \geq | \widehat{\beta}_{(M)} |     \right) \nonumber } \pause
+\end{eqnarray}
+
+
+\invisible<1-4>{Intuition 2: Prior on coefficients $\leadsto$ Laplace ``The Bayesian LASSO" } \pause
+
+\invisible<1-5>{Why does LASSO induce sparsity?}
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Comparing Ridge and LASSO}
+
+
+\only<1>{\scalebox{0.8}{\includegraphics{RidgeExamp1.pdf}}}
+\only<2>{\scalebox{0.8}{\includegraphics{LassoExamp1.pdf}}}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Comparing Ridge and LASSO}
+
+Contrast $\beta = (\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}} )$ and $\tilde{\beta} = (1, 0)$ \pause
+
+\invisible<1>{Under ridge:}\pause
+\begin{eqnarray}
+\invisible<1-2>{\sum_{j=1}^{2} \beta_{j}^{2} & = & \frac{1}{2} + \frac{1}{2} = 1\nonumber \\} \pause
+\invisible<1-3>{\sum_{j=1}^{2} \tilde{\beta}_{j}^{2}  & = &  1 + 0 = 1 } \pause \nonumber
+\end{eqnarray}
+
+\invisible<1-4>{Under LASSO } \pause
+\begin{eqnarray}
+\invisible<1-5>{\sum_{j=1}^{2} |\beta_{j}| & = & \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}  = \sqrt{2} \nonumber \\} \pause
+\invisible<1-6>{\sum_{j=1}^{2} |\tilde{\beta}_{j}| & = & 1 +0 = 1 \nonumber }
+\end{eqnarray}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Ridge and LASSO: The Elastic-Net}
+
+Combining the two criteria $\leadsto$ Elastic-Net
+
+\begin{small}
+\begin{eqnarray}
+f(\boldsymbol{\beta}, \boldsymbol{X}, \boldsymbol{Y} ) & = & \frac{1}{2N} \sum_{i=1}^{N}\left(y_{i} - \beta_{0} - \sum_{j=1}^{J} \beta_{j} x_{ij} \right)^2 + \lambda \sum_{j=1}^{J} \left(\frac{1}{2} (1-\alpha)\beta_{j}^2 + \alpha|\beta_{j}|    \right) \nonumber
+\end{eqnarray}
+\end{small}
+
+\pause
+
+\invisible<1>{The new update step (for coordinate descent:)} \pause
+
+\invisible<1-2>{\begin{eqnarray}
+\beta_{j} & \leftarrow & \frac{\text{sign}(r^{j})\text{max}(|r^{j}| - \lambda \alpha, 0)}{1 + \lambda (1- \alpha) } \nonumber
+\end{eqnarray}
+}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Selecting $\lambda$}
+
+How do we determine $\lambda$? $\leadsto$ Cross validation  \pause \\
+\invisible<1>{Applying models gives score (probability) of document belong to class$\leadsto$ threshold to classify} \pause \\
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Loss Functions and Model Complexity}
+
+
+Suppose observations $i$ have dependent variables $Y_{i}$ and covariates $\boldsymbol{x}_{i} = (x_{i1}, x_{i2}, \hdots, x_{iP})$. \pause   \\
+\invisible<1>{Assume:
+\begin{eqnarray}
+Y_{i} & \sim   & \text{Distribution}(\mu_{i}, \phi) \nonumber \\
+\mu_{i} & = & f(\boldsymbol{\beta}, \boldsymbol{x}_{i})   \nonumber
+\end{eqnarray}
+
+Use MLE to obtain $\hat{\boldsymbol{\beta}}$.  \\} \pause
+\invisible<1-2>{Potential \alert{loss} functions:} \pause
+\begin{eqnarray}
+\invisible<1-3>{L\left(Y_{i}, f(\hat{\boldsymbol{\beta}}, \boldsymbol{x}_{i} )\right)}\pause \invisible<1-4>{ & = & \left(Y_{i} - f(\hat{\boldsymbol{\beta}}, \boldsymbol{x}_{i} )\right)^{2} \nonumber \\} \pause
+\invisible<1-5>{& = & \left| Y_{i} - f(\hat{\boldsymbol{\beta}}, \boldsymbol{x}_{i} )\right| \nonumber \\} \pause
+\invisible<1-6>{& = & I\left(Y_{i}  =  1- I(f(\hat{\boldsymbol{\beta}}, \boldsymbol{x}_{i})> \tau)\right) \nonumber }
+\end{eqnarray}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Training and Test Sets}
+
+
+The useful ``fiction" of training and test sets: \pause
+
+
+\begin{itemize}
+\invisible<1>{\item[-] Training set: data set used to fit the model} \pause
+\invisible<1-2>{\item[-] Test set: data used to evaluate fit of the model} \pause
+\end{itemize}
+
+\invisible<1-3>{Even if no division, useful to think about \alert{systematic} components of data.  }
+
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Loss Functions and Model Complexity}
+
+
+Suppose that we have: \pause
+\begin{itemize}
+\invisible<1>{\item[-] Training sets, $\mathcal{T}$, with $|\mathcal{T}| = N_{\text{train}}$ } \pause
+\invisible<1-2>{\item[-] Test sets, $\mathcal{O}$ with $| \mathcal{O}| = N_{\text{test}}$} \pause
+\end{itemize}
+
+\invisible<1-3>{Training (in-sample) error is:} \pause
+
+\begin{eqnarray}
+\invisible<1-4>{\text{Error}_{\text{in}} }  \pause & = &\invisible<1-5>{ \sum_{i \in \mathcal{T}} \frac{1}{N_{\text{train}}} L(Y_{i} , f(\hat{\boldsymbol{\beta}}, \boldsymbol{x}_{i} )) \nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-6>{We'd like to estimate out of sample performance with } \pause
+\begin{eqnarray}
+\invisible<1-7>{\text{Error}_{\text{out}} & = & \text{E}[L(\boldsymbol{Y}_{i \in \mathcal{O}} , f(\hat{\boldsymbol{\beta}} , \boldsymbol{x}_{i \in \mathcal{O}}))| \mathcal{T} ] \nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-8>{where the expectation is taken over \alert{samples} for test sets and supposes we have a training set.   } \pause
+
+\begin{eqnarray}
+\invisible<1-9>{\text{Error} & = & \text{E}\left[\text{E}[L(\boldsymbol{Y} , f(\hat{\boldsymbol{\beta}} , \boldsymbol{X}))| \mathcal{T} ] \right] \nonumber }
+\end{eqnarray}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Loss Functions and Model Complexity}
+
+Suppose $Y_{i} = f(\boldsymbol{x}_{i} ) + \epsilon_{i}$ \pause  \\
+\invisible<1>{Where $E[\epsilon_{i} ] = 0 $ } \pause \\
+\invisible<1-2>{$\text{var}(\epsilon_{i}) = \sigma^{2}_{\epsilon} $} \pause \\
+\invisible<1-3>{Define $f(\hat{\boldsymbol{\beta}}, \boldsymbol{x} ) = \hat{f}(\boldsymbol{x})$ } \pause \\
+\invisible<1-4>{With squared error loss: } \pause
+\begin{eqnarray}
+\invisible<1-5>{\text{Error}(\boldsymbol{x}_{0}) & = & \text{E}[(Y_{i} - \hat{f}(\boldsymbol{x}_{i}))^{2} | \boldsymbol{x}_{i} = \boldsymbol{x}_{0} ]  \nonumber \\} \pause
+\invisible<1-6>{& = & \text{E}[(f(\boldsymbol{x}_{i}) + \epsilon_{i}  - \hat{f}(\boldsymbol{x}_{i}))^{2} | \boldsymbol{x}_{i} = \boldsymbol{x}_{0} ]  \nonumber \\} \pause
+\invisible<1-7>{& = & \sigma^{2}_{\epsilon} + \left[ f(\boldsymbol{x}_{0}) - \text{E}[\hat{f}(\boldsymbol{x}_{0})]\right]^{2}  + E[\left(\hat{f}(\boldsymbol{x}_{0} ) - E[\hat{f}(\boldsymbol{x}_{0} )]\right)^{2} ] \nonumber \\} \pause
+\invisible<1-8>{& = & \text{Irreducible error} + \text{Bias}^{2} + \text{Variance} \nonumber }
+\end{eqnarray}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Probit Regression (for motivational purposes)}
+
+
+Suppose:
+\begin{eqnarray}
+Y_{i} & \sim & \text{Bernoulli}(\pi_{i}) \nonumber \\
+\pi_{i} & = & \Phi(\boldsymbol{\beta}^{'}\boldsymbol{x}_{i}) \nonumber
+\end{eqnarray}
+
+where $\Phi(\cdot)$ is the cumulative normal distribution.\\
+Implies log-likelihood
+\begin{eqnarray}
+\log \text{L}(\boldsymbol{\beta}| \boldsymbol{X} , \boldsymbol{Y}) &  = & \sum_{i=1}^{N} \left[ Y_{i} \log \Phi(\boldsymbol{\beta}^{'}\boldsymbol{x}_{i} )   + (1-Y_{i}) \log (1-  \Phi(\boldsymbol{\beta}^{'}\boldsymbol{x}_{i} )) \right] \nonumber
+\end{eqnarray}
+
+Log-likelihood is a \alert{loss function}$\leadsto$ overly optimistic: improves with more parameters
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{How Do We Build A Model?}
+
+
+There are many ways to fit models \\
+And many choices made when performing model fit\\
+How do we choose? \pause \\
+
+\invisible<1>{Bad way to choose:}\pause \invisible<1-2>{ within sample model fit (HTF Figure 7.1) }
+
+\begin{center}
+\scalebox{0.5}{\includegraphics{TestTrain.png}}
+\end{center}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{How Do We Build A Model?}
+
+\begin{center}
+\scalebox{0.325}{\includegraphics{TestTrain.png}}
+\end{center}
+
+
+Model \alert{overfit}$\leadsto$ in sample error is \alert{optimistic}: \pause
+\begin{itemize}
+\invisible<1>{\item[-] Some model complexity captures \alert{systematic} features of the data} \pause
+\invisible<1-2>{\item[-] Characteristics found in both training and test set} \pause
+\invisible<1-3>{\item[-] Reduces error in both training and test set } \pause
+\invisible<1-4>{\item[-] Additional model complexity: \alert{idiosyncratic} features of the training set} \pause
+\invisible<1-5>{\item[-] Reduces error in training set, increases error in test set}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How Do We Choose Covariates?}
+
+Best model \alert{depends on task}
+
+\begin{itemize}
+\item[-] Causal inference observational study: make treatment assignment ignorable
+\item[-] Prediction: improve predictive performance
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Stepwise Regression}
+Suppose we have $P$ covariates. \\
+$2^{P}$ potential models\\
+
+\pause
+\invisible<1>{Stepwise procedures} \pause
+\begin{itemize}
+\invisible<1-2>{\item[1)] Forward selection
+\begin{itemize}
+\item[a)] No variables in model.
+\item[b)] Check all variables p-value if include, include lowest p-value
+\item[c)] Repeat until included p-value is above some threshold} \pause
+\end{itemize}
+\invisible<1-3>{\item[2)] Backward elimination
+\begin{itemize}
+\item[a)] Fit model with all variables (if possible)
+\item[b)] Remove variable with largest p-value
+\item[c)] Repeat until potentially excluded p-value is below some threshold} \pause
+\end{itemize}
+\end{itemize}
+
+\invisible<1-4>{Problematic:
+\begin{itemize}
+\item[1)] Not optimal model selection (path dependent)
+\item[2)] P-value $\neq$ objective of model}
+\end{itemize}
+
+
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Analytic Solutions}
+
+Approximate optimism and compensate in loss function.  \pause \\
+
+\invisible<1>{Akaike Information Criterion (AIC) $\leadsto$ Minimize\\} \pause
+\invisible<1-2>{As $N \rightarrow \infty $ } \pause
+
+\begin{eqnarray}
+\invisible<1-3>{- 2 \text{E} [ \log P_{\hat{\boldsymbol{\beta}}} (Y)] & = & -2\left[ \text{E} [\log \text{L}(\hat{\boldsymbol{\beta}}| \boldsymbol{X} , \boldsymbol{Y})]  -  d \right] \nonumber \\} \pause
+\invisible<1-4>{\text{AIC} & = & - 2 \left[\log \text{L}(\hat{\boldsymbol{\beta}}| \boldsymbol{X} , \boldsymbol{Y}) - d \right] \nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-5>{where $d$ is the number of parameters in the model} \pause
+
+\begin{itemize}
+\invisible<1-6>{\item[-] Intuition: balances model fit with penalty for complexity} \pause
+\invisible<1-7>{\item[-] Derived from method to estimate \alert{optimism} in likelihood based models} \pause
+\invisible<1-8>{\item[-] Derived from a method to compute similarity between estimated model and true model (under assumptions of course)} \pause
+\invisible<1-9>{\item[-] Can be extended to general models, though requires estimate of irresolvable error}
+\end{itemize}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Analytic Solutions}
+
+Bayesian Information Criterion (BIC) [Schwarz Criterion] \pause
+
+\begin{eqnarray}
+\invisible<1>{\text{BIC} &  = &  - 2 \log \text{L}(\widehat{\boldsymbol{\beta}}| \boldsymbol{X} , \boldsymbol{Y}) + (\log N) d \nonumber } \pause
+\end{eqnarray}
+
+
+\invisible<1-2>{where $d$ is again the effective number of parameters} \pause
+\begin{itemize}
+\invisible<1-3>{\item[-] Intuition: balances model fit with penalty for complexity} \pause
+\invisible<1-4>{\item[-] Derived from \alert{Bayesian} approach to model selection} \pause
+\invisible<1-5>{\item[-] Approximation to Bayes' factor} \pause
+\invisible<1-6>{\item[-] \alert{Penalizes more heavily than AIC}}
+\end{itemize}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{BIC or AIC?}
+
+\begin{center}
+\only<1>{\scalebox{0.55}{\includegraphics{Bayes1.pdf}}}\only<2>{\scalebox{0.55}{\includegraphics{Bayes2.pdf}}}\only<3>{\scalebox{0.55}{\includegraphics{Bayes3.pdf}}}\only<4>{\scalebox{0.55}{\includegraphics{Bayes4.pdf}}}\only<5>{\scalebox{0.55}{\includegraphics{Bayes5.pdf}}}\only<6>{\scalebox{0.55}{\includegraphics{Bayes6.pdf}}}\only<7>{\scalebox{0.55}{\includegraphics{Bayes7.pdf}}}\only<8>{\scalebox{0.55}{\includegraphics{Bayes8.pdf}}}\only<9>{\scalebox{0.55}{\includegraphics{Bayes9.pdf}}}\only<10>{\scalebox{0.55}{\includegraphics{Bayes10.pdf}}}\only<11>{\scalebox{0.55}{\includegraphics{AIC1.pdf}}}\only<12>{\scalebox{0.55}{\includegraphics{AIC2.pdf}}}\only<13>{\scalebox{0.55}{\includegraphics{AIC3.pdf}}}\only<14>{\scalebox{0.55}{\includegraphics{AIC4.pdf}}}\only<15>{\scalebox{0.55}{\includegraphics{AIC5.pdf}}}\only<16>{\scalebox{0.55}{\includegraphics{AIC6.pdf}}}\only<17>{\scalebox{0.55}{\includegraphics{AIC7.pdf}}}\only<18>{\scalebox{0.55}{\includegraphics{AIC8.pdf}}}\only<19>{\scalebox{0.55}{\includegraphics{AIC9.pdf}}}\only<20>{\scalebox{0.55}{\includegraphics{AIC10.pdf}}}
+\end{center}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{BIC or AIC?}
+
+\begin{itemize}
+\item[-] BIC
+\begin{itemize}
+\item[-] Asymptotically consistent \alert{if true model is in choice set}
+\item[-] As $N\rightarrow \infty$ will choose correct model with probability 1 (if available)
+\item[-] Small samples$\leadsto$ overpenalize
+\end{itemize}
+\item[-] AIC
+\begin{itemize}
+\item[-] No asymptotic guarantees $\leadsto$ derivation doesn't require truth in set.  (KL-criteria)
+\item[-] In large samples$\leadsto$ favors complexity
+\item[-] Small samples$\leadsto$ avoids over penalization
+\end{itemize}
+\end{itemize}
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{How Do We Select A Model?}
+
+Analytic statistics for selection, include penalty for complexity \pause
+\begin{itemize}
+\invisible<1>{\item[-] AIC : Akaka Information Criterion} \pause
+\invisible<1-2>{\item[-] BIC: Bayesian Information Criterion} \pause
+\invisible<1-3>{\item[-] DIC: Deviance Information Criterion} \pause
+\end{itemize}
+
+\invisible<1-4>{Can work well, but...} \pause
+\begin{itemize}
+\invisible<1-5>{\item[-] Rely on specific loss function} \pause
+\invisible<1-6>{\item[-] Rely on asymptotic argument} \pause
+\invisible<1-7>{\item[-] Rely on estimate of number of parameters} \pause
+\invisible<1-8>{\item[-] \alert{Extremely model dependent} } \pause
+\end{itemize}
+
+\invisible<1-9>{Need: general tool for evaluating models, \alert{replicates} decision problem}
+
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{Cross-Validation: Some Intuition}
+
+Optimal division of data for prediction: \pause
+\begin{itemize}
+\invisible<1>{\item[-] Train: build model} \pause
+\invisible<1-2>{\item[-] Validation: assess model} \pause
+\invisible<1-3>{\item[-] Test: predict remaining data} \pause
+\end{itemize}
+
+\invisible<1-4>{K-fold Cross-validation idea: create many training and test sets.  } \pause
+\begin{itemize}
+\invisible<1-5>{\item[-] Idea: use observations both in training and test sets} \pause
+\invisible<1-6>{\item[-] Each step: use held out data to evaluate performance} \pause
+\invisible<1-7>{\item[-] \alert{Avoid overfitting} and have context specific penalty } \pause
+\end{itemize}
+
+\invisible<1-8>{Estimates:}
+\begin{eqnarray}
+\invisible<1-8>{\text{Error} & = & \text{E}\left[\text{E}[L(\boldsymbol{Y} , f(\hat{\boldsymbol{\beta}} , \boldsymbol{X}))| \mathcal{T} ] \right] \nonumber }
+\end{eqnarray}
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Cross-Validation: A How To Guide}
+
+Process: \pause
+\begin{itemize}
+\invisible<1>{\item[-]  Randomly partition data into K groups. } \pause
+\invisible<1-2>{\item[] (Group 1, Group 2, Group3, $\hdots$, Group K ) } \pause
+\invisible<1-3>{\item[-]  Rotate through groups as follows} \pause
+\end{itemize}
+\begin{tabular}{lll}
+\invisible<1-4>{Step & Training & Validation (``Test") \\} \pause
+\invisible<1-5>{1 & Group2, Group3, Group 4, $\hdots$, Group K & Group 1\\} \pause
+\invisible<1-6>{2 & Group 1, Group3, Group 4, $\hdots$, Group K & Group 2 \\} \pause
+\invisible<1-7>{3 & Group 1, Group 2, Group 4, $\hdots$, Group K & Group 3 \\} \pause
+\invisible<1-8>{$\vdots$ & $\vdots$ & $\vdots$ \\} \pause
+\invisible<1-9>{K & Group 1, Group 2, Group 3, $\hdots$, Group K - 1 & Group K }
+\end{tabular}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Cross-Validation: A How To Guide}
+\footnotesize
+\begin{tabular}{lll}
+Step & Training & Validation (``Test") \\
+1 & Group2, Group3, Group 4, $\hdots$, Group K & Group 1\\
+2 & Group 1, Group3, Group 4, $\hdots$, Group K & Group 2 \\
+3 & Group 1, Group 2, Group 4, $\hdots$, Group K & Group 3 \\
+$\vdots$ & $\vdots$ & $\vdots$ \\
+K & Group 1, Group 2, Group 3, $\hdots$, Group K - 1 & Group K
+\end{tabular}
+\normalsize
+ \pause \invisible<1>{Strategy: } \pause
+\begin{itemize}
+\invisible<1-2>{\item[-] Divide data into $K$ groups} \pause
+\invisible<1-3>{\item[-] Train data on $K-1$ groups.  Estimate $\hat{f}^{-K}(\boldsymbol{\beta}, \boldsymbol{X})$  } \pause
+\invisible<1-4>{\item[-] Predict values for $K^{\text{th}}$} \pause
+\invisible<1-5>{\item[-] Summarize performance with loss function: $L(\boldsymbol{Y}_i , \hat{f}^{-k} (\boldsymbol{\beta}, \boldsymbol{X})  ) $} \pause
+\begin{itemize}
+\invisible<1-6>{\item[-] Mean square error, Absolute error, Prediction error, ...} \pause
+\end{itemize}
+\invisible<1-7>{\item[] CV(ind. classification)  = $ \frac{1}{N}\sum_{i=1}^{N} L(\boldsymbol{Y}_i , f^{-k} (\boldsymbol{\beta}, \boldsymbol{X}_i)  ) $} \pause
+\invisible<1-8>{\item[] CV(proportions)   =  $\frac{1}{K} \sum_{j=1}^{K} \text{Mean Square Error Proportions from Group j}$} \pause
+\invisible<1-9>{\item[-] Final choice: model with highest $CV$ score}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{How Do We Select $K$? (HTF, Section 7.10)  }
+
+Common values of $K$
+\begin{itemize}
+\item[-] $K = 5$: Five fold cross validation
+\item[-] $K = 10$: Ten fold cross validation
+\item[-] $K = N $: Leave one out cross validation
+\end{itemize}
+
+Considerations:
+\begin{itemize}
+\item[-] How sensitive are inferences to number of coded documents? (HTF, pg 243-244)
+\item[-] 200 labeled documents
+\begin{itemize}
+\item[-] $K= N \rightarrow$ 199 documents to train,
+\item[-] $K = 10 \rightarrow$ 180 documents to train
+\item[-] $K = 5 \rightarrow$ 160 documents to train
+\end{itemize}
+\item[-] 50 labeled documents
+\begin{itemize}
+\item[-] $K= N \rightarrow$ 49 documents to train,
+\item[-] $K = 10 \rightarrow$ 45 documents to train
+\item[-] $K = 5 \rightarrow$ 40 documents to train
+\end{itemize}
+\item[-] How long will it take to run models?
+\begin{itemize}
+\item[-] $K-$fold cross validation requires $K \times $ One model run
+\end{itemize}
+\item[-] What is the correct loss function?
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{If you cross validate, you really need to cross validate (Section 7.10.2, ESL)}
+
+\begin{itemize}
+\item[-] Use CV to estimate prediction error
+\item[-] \alert{All} supervised steps performed in cross-validation
+\item[-] \alert{Underestimate} prediction error
+\item[-] \alert{Could lead to selecting lower performing model}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Example from Facebook Data}
+
+What do people say to legislators?  (Franco, Grimmer, and Lee 2017)
+\begin{itemize}
+\item[1)] Example: estimating classification error
+\begin{itemize}
+\item[a)] Accuracy in legislator posts: 75\%
+\item[b)] Accuracy in public posts: 66.25\%
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Credit Claiming (Back to Ridge/Lasso, Grimmer, Westwood, and Messing 2014)}
+
+\begin{footnotesize}
+%\#\#credit is a 797 element long binary vector
+
+%\#\#dtm is a 797 x 7587 document term matrix
+\begin{semiverbatim}
+\only<1>{library(glmnet)
+
+set.seed(8675309) \#\#setting seed
+
+folds<- sample(1:10, nrow(dtm), replace=T) \#\#assigning to fold
+
+out\_of\_samp<- c()  \#\#collecting the predictions}
+
+
+\only<2>{for(z in 1:10)\{
+
+  train<- which(folds!=z) \#\#the observations we will use to train the model
+
+  test<- which(folds==z) \#\#the observations we will use to test the model
+
+  part1<- cv.glmnet(x = dtm[train,], y = credit[train], alpha = 1, family = \'binomial\') \#\#fitting the LASSO model on the data.
+
+  \#\# alpha = 1 -> LASSO
+
+  \#\# alpha = 0 -> RIDGE
+
+  \#\# 0<alpha<1 -> Elastic-Net
+
+  out\_of\_samp[test]<- predict(part1, newx= dtm[test,], s = part1\$lambda.min, type =\'class\') \#\#predicting the labels
+
+  print(z) \#\#printing the labels
+
+  \}
+
+conf\_table<- table(out\_of\_samp, credit)  \#\#calculating the confusion table
+
+> round(sum(diag(conf\_table))/len(credit), 3)
+
+[1] \alert{0.844}
+}
+\end{semiverbatim}
+\end{footnotesize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Generalized Cross Validation and Ridge Regression}
+
+In some special cases there are analytic solutions: \\ \pause
+
+\begin{eqnarray}
+\invisible<1>{\boldsymbol{\beta}^{\text{Ridge}} & = & \left(\boldsymbol{X}^{'}\boldsymbol{X} + \lambda \boldsymbol{I}_{J} \right)^{-1} \boldsymbol{X}^{'} \boldsymbol{Y} \nonumber } \pause \\
+\invisible<1-2>{\widehat{\boldsymbol{Y}} & = & \boldsymbol{X}(\boldsymbol{\beta})^{\text{Ridge}} \nonumber\\} \pause
+\invisible<1-3>{& = & \underbrace{\boldsymbol{X}\left(\boldsymbol{X}^{'}\boldsymbol{X} + \lambda \boldsymbol{I}_{J} \right)^{-1} \boldsymbol{X}^{'}}_{\text{Hat Matrix}} \boldsymbol{Y} \nonumber\\} \pause
+\invisible<1-4>{\widehat{\boldsymbol{Y}} & = & \underbrace{\boldsymbol{H}}_{\text{Smoother Matrix}} \boldsymbol{Y}  \nonumber } \pause
+\end{eqnarray}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Generalized Cross Validation and Ridge Regression}
+
+
+Why do we care?  \pause \\
+\invisible<1>{Leave one out cross validation\\} \pause
+\begin{eqnarray}
+\invisible<1-2>{\text{Cross Validation}(1) & = & \frac{1}{N} \sum_{i=1}^{N} (Y_{i} - f (\boldsymbol{X}_{-i}, \boldsymbol{Y}_{-i}, \lambda, \hat{\boldsymbol{\beta}} ))^{2} \nonumber \\} \pause
+\invisible<1-3>{& = & \frac{1}{N} \sum_{i=1}^{N}  \left(\frac{Y_{i} - f (\boldsymbol{X}, \boldsymbol{Y}, \lambda, \hat{\boldsymbol{\beta} }) }{1 - H_{ii}} \right)^2 \nonumber}
+\end{eqnarray}
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Generalized Cross Validation and Ridge Regression}
+
+Calculating $\boldsymbol{H}$ can be computationally expensive \pause \\
+\begin{itemize}
+\invisible<1>{\item[-] $\text{Trace}(\boldsymbol{H}) \equiv \text{Tr}(\boldsymbol{H})  = \sum_{i=1}^{N} H_{ii} $ } \pause
+\invisible<1-2>{\item[-] $\text{Tr}(\boldsymbol{H})$ = Effective number of parameters (class regression = number of independent variables + 1)} \pause
+\invisible<1-3>{\item[-] For Ridge regression:} \pause
+\begin{eqnarray}
+\invisible<1-4>{\text{Tr}(\boldsymbol{H}) & = & \sum_{j=1}^{J} \frac{\lambda_{j}}{\lambda_{j} + \underbrace{\lambda}_{\text{Penalty}}} \nonumber } \pause
+\end{eqnarray}
+\invisible<1-5>{where $\lambda_{j}$ is the $j^{\text{th}}$ Eigenvalue from $\boldsymbol{\Sigma} = \boldsymbol{X}^{'}\boldsymbol{X}$} \pause \invisible<1-6>{ (!!!!!)} \pause
+\end{itemize}
+
+
+\invisible<1-7>{Define generalized cross validation:} \pause
+\begin{eqnarray}
+\invisible<1-8>{\text{GCV} &  = & \frac{1}{N} \sum_{i=1}^{N} \left( \frac{Y_{i} - \hat{Y}_{i}}{1 - \frac{\text{Tr}(\boldsymbol{H})}{N} }    \right)^2 \nonumber } \pause
+\end{eqnarray}
+
+\invisible<1-9>{Applicable in any setting where we can write \alert{Smoother} matrix} \pause
+
+\end{frame}
+
+
+
+
+
+
+
+
+
+\end{document}
