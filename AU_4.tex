@@ -1,0 +1,1349 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+%\documentclass{beamer}
+
+%\documentclass[handout]{beamer}
+
+%\usepackage[table]{xcolor}
+\mode<presentation> {
+  \usetheme{Boadilla}
+%  \usetheme{Pittsburgh}
+%\usefonttheme[2]{sans}
+\renewcommand{\familydefault}{cmss}
+%\usepackage{lmodern}
+%\usepackage[T1]{fontenc}
+%\usepackage{palatino}
+%\usepackage{cmbright}
+  \setbeamercovered{transparent}
+\useinnertheme{rectangles}
+}
+\usepackage{soul}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{structure}{fg= black}
+\beamertemplatesolidbackgroundcolor{white}  \setbeamercolor{alerted
+text}{fg=red}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{colortbl}
+\usepackage{color}
+\definecolor{gold}{rgb}{0.85,0.66,0}
+\usepackage{cancel}
+\usepackage{comment}
+\usepackage{enumerate}
+\usepackage{multirow}
+\usepackage{fancybox}
+\usepackage{framed}
+
+% === check mark
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+% === tikz for pictures ===
+\usepackage{tikz}
+\usepackage[latin1]{inputenc}
+\usetikzlibrary{shapes,arrows,trees,fit,positioning}
+
+% ==== dotted lines in tables ===
+\usepackage{arydshln}
+\usepackage[normalem]{ulem}
+
+% === dcolumn package ===
+\usepackage{dcolumn}
+\newcolumntype{.}{D{.}{.}{-1}}
+\newcolumntype{d}[1]{D{.}{.}{#1}}
+
+% === new commands ===
+\newcommand\ud{\mathrm{d}}
+\newcommand\dist{\buildrel\rm d\over\sim}
+\newcommand\ind{\stackrel{\rm indep.}{\sim}}
+\newcommand\iid{\stackrel{\rm i.i.d.}{\sim}}
+\newcommand\logit{{\rm logit}}
+\renewcommand\r{\right}
+\renewcommand\l{\left}
+\newcommand\Var{{\rm Var}}
+\newcommand\var{{\rm var}}
+\newcommand\Cov{{\rm Cov}}
+\newcommand\bone{\mathbf{1}}
+\newcommand\E{\mathbb{E}}
+\newcommand\wX{\widetilde{X}}
+\newcommand\wT{\widetilde{T}}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\usetikzlibrary{shapes,backgrounds}
+\tikzstyle{cblue}=[circle, draw, thin,fill=cyan!20, scale=0.8]
+\tikzstyle{qgre}=[rectangle, draw, thin,fill=green!20, scale=0.8]
+\tikzstyle{rpath}=[ultra thick, red, opacity=0.4]
+\tikzstyle{legend_isps}=[rectangle, rounded corners, thin,
+                       fill=gray!20, text=blue, draw]
+\usetikzlibrary{decorations.pathreplacing}
+\tikzset{text/.default=}
+%\tikzset{text/.align=0}
+\tikzstyle{every picture}+=[remember picture]
+\tikzstyle{na} = [baseline=-.5ex]
+
+\usetikzlibrary{shapes}
+\usetikzlibrary{positioning}
+\usetikzlibrary{automata}
+\usepackage{amsmath,amssymb,amsfonts,amsthm}
+\setbeamercovered{invisible} %% <--- I ADDED THIS
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\blue}{\textcolor{blue}}
+\newcommand{\purple}{\textcolor{purple}}
+\newcommand{\brown}{\textcolor{brown}}
+\newcommand{\cyan}{\textcolor{cyan}}
+\newcommand{\real}{\ensuremath{\mathbb{R}}}
+\newcommand{\y}{\ensuremath{\mathbf{y}}}
+\newcommand{\black}{\color{black}}
+\newcommand{\btheta}{\boldsymbol{\theta}}
+\newcommand{\green}{\color{green}}
+\newcommand{\word}[1]{\green{\textit{#1}\ }\black}
+\newcommand{\lb}{\linebreak}
+\newcommand\K{{\bm K}}
+
+ \newenvironment{changemargin}[3]{%
+ \begin{list}{}{%
+ \setlength{\topsep}{0pt}%
+ \setlength{\leftmargin}{#1}%
+ \setlength{\rightmargin}{#2}%
+ \setlength{\topmargin}{#3}%
+ \setlength{\listparindent}{\parindent}%
+ \setlength{\itemindent}{\parindent}%
+ \setlength{\parsep}{\parskip}%
+ }%
+ \item[]}{\end{list}}
+
+
+\newcommand\bX{\mathbf{X}}
+\newcommand\bB{\mathbf{B}}
+\newcommand\bD{\mathbf{D}}
+\newcommand\bM{\mathbf{M}}
+\newcommand\bH{\mathbf{H}}
+\newcommand\bI{\mathbf{I}}
+\newcommand\bG{\mathbf{G}}
+\newcommand\bR{\mathbf{R}}
+\newcommand\bS{\mathbf{S}}
+\newcommand\bV{\mathbf{V}}
+\newcommand\bW{\mathbf{W}}
+\newcommand{\argmin}{\operatornamewithlimits{argmin}}
+\newcommand{\argmax}{\operatornamewithlimits{argmax}}
+\newcommand{\indep}{\mbox{$\perp\!\!\!\perp$}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\DeclareMathOperator{\sgn}{sgn}
+\newcommand\spacingset[1]{\renewcommand{\baselinestretch}%
+{#1}\small\normalsize}
+\newcommand\ex{\colorbox{princetonorange}{\color{princetonblack}\textsc{Example}} }
+\definecolor{princetonorange}{RGB}{245, 128, 37}
+\definecolor{princetonblack}{RGB}{0,0,0}
+
+% == theorems
+\setbeamertemplate{theorems}[numbered]
+\newcounter{asm}
+\setcounter{asm}{0}
+\newtheorem{assumption}[asm]{Assumption}
+\newtheorem{prop}{Proposition}
+
+%\usepackage[latin1]{inputenc}
+\title[Text as Data] % (optional, nur bei langen Titeln nötig)
+{Text as Data}
+
+\author{Justin Grimmer}
+\institute[Stanford University]{Professor\\Department of Political Science \\  Stanford University}
+\vspace{0.3in}
+
+
+\date{May 24th, 2019}%[Big Data Workshop]
+%\date{\today}
+
+
+
+\begin{document}
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Discovery and Measurement}
+
+What is the research process? (Grimmer, Roberts, and Stewart 2017)
+
+\begin{itemize}
+  \item[1)] \alert{Discovery}: a hypothesis or view of the world
+  \item[2)] \alert{Measurement} according to some organization
+  \item[3)] \alert{Causal Inference}: effect of some intervention
+\end{itemize}
+
+Text as data methods assist at each stage of research process
+
+\end{frame}
+
+
+
+\begin{frame}
+
+\huge
+
+Causal Inference
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}
+\frametitle{A Causal Inference Refresher}
+
+\pause 
+
+\begin{itemize}
+\invisible<1>{\item[-] Suppose we have $N$ units, $i = 1, \hdots, N$.\\} \pause 
+\invisible<1-2>{\item[-] Each unit receives treatment $\boldsymbol{T}_{i}$ (potentially vector valued)} \pause 
+\invisible<1-3>{\item[-] Suppose we have (potentially vector valued) response $\boldsymbol{Y}_{i}(\boldsymbol{T}_{i})$} \pause 
+\begin{itemize}
+\invisible<1-4>{\item[-] Unit $i$'s response to treatment $\boldsymbol{T}_{i}$ } \pause 
+\invisible<1-5>{\item[-] Function: maps from treatments to responses} \pause 
+\end{itemize}
+\invisible<1-6>{\item[-] Fundamental problem of causal inference observe only one $\boldsymbol{Y}_{i}(\boldsymbol{T}_{i})$ } \pause 
+\invisible<1-7>{\item[-] Quantity of interest:} \pause 
+\begin{itemize}
+\invisible<1-8>{\item[-] Simplest (yet very powerful) case$\leadsto$ $T_{i} \in \{0, 1\}$, $Y_{i}(T_{i}) \in \{0, 1\}$} \pause 
+\begin{eqnarray}
+\invisible<1-9>{\text{ATE} & = & E[Y(1) - Y(0)]  \nonumber } \pause 
+\end{eqnarray}
+\invisible<1-10>{\item[-] Estimate with: } \pause 
+\begin{eqnarray}
+\only<1-12>{\invisible<1-11>{\widehat{\text{ATE}} & = & E[Y(1)| T= 1] - E[Y(0)| T = 0 ] \nonumber } }
+\only<13->{\widehat{\text{ATE}} & = & \frac{\sum_{i=1}^{N} I(T_{i} = 1) Y_{i}}{ \sum_{i=1}^{N} I(T_{i} = 1) } - \frac{\sum_{i=1}^{N} I(T_{i} = 0) Y_{i}}{ \sum_{i=1}^{N} I(T_{i} = 0) }} \nonumber 
+\end{eqnarray}
+\pause 
+\end{itemize}
+\end{itemize}
+
+\pause 
+\invisible<1-13>{Question: how do we \alert{accurately} estimate quantities like ATE?} 
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Our Plan for the Day}
+
+\begin{itemize}
+  \item[-] Experimental design
+  \item[-] Conditional average treatment effects
+  \item[-] Methods for estimating heterogeneous treatment effects
+\end{itemize} 
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{\alert{An Example} Experiment } 
+
+
+\only<1-2>{\invisible<1>{Rep. Harold ``Hal" Rogers (KY-05) announced today that Kentucky is slated to
+receive \$962,500 to protect critical infrastructure- power plants, chemical
+facilities, stadiums, and other high-risk assets, through the U.S. Department of
+Homeland Security's buffer zone protection program} }
+
+\only<3>{A federal grant will help keep the Brainerd Lakes Airport operating in winter
+weather. Today, Congressman Jim Oberstar announced that the Federal Aviation
+Administration (FAA) will award \$528,873 to the Brainerd airport. The funding
+will be used to purchase new snow removal and deicing equipment.}
+
+
+\only<4>{Congresswoman Darlene Hooley (OR-5) and Congressmen Earl Blumenauer (OR-3),
+David Wu (OR-1) and Greg Walden (OR-2) joined together today in announcing
+\$375,000 in federal funding for the Oregon Partnership to combat methamphetamine
+abuse in Oregon.\\}
+
+
+\only<5>{What information in credit claiming messages affect evaluations?}
+
+\pause \pause \pause \pause
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Rewarding Actions and Type of Expenditure, Not Money}
+
+Experiment: vary the \alert{recipient} of money and the \alert{action} reported in credit claiming statement (and many other features)
+
+\invisible<1>{Treatments: \alert<2>{type}}\invisible<1-2>{, \alert<3>{stage}}\invisible<1-3>{, \alert<4>{money}}\invisible<1-4>{, \alert<5>{collaboration}}\invisible<1-5>{, \alert<6>{partisanship}} 
+
+%\invisible<1>{Treatments: \alert<2>{type}}\invisible<1-2>{, \alert<3>{stage}} \invisible<1-3>{money, collaboration, and partisanship} 
+
+\only<1>{\vspace{1.65in}}
+\only<7>{\alert{Control Condition}:}
+
+
+\only<2>{\begin{itemize}
+\item[1)] Planned Parenthood
+\item[2)] Parks
+\item[3)] Gun Range
+\item[4)] Fire Department
+\item[5)] Police 
+\item[6)] Roads
+\end{itemize}
+\vspace{0.125in}}
+
+\only<4>{\begin{itemize}
+\item[1)] \$50 Thousand
+\item[2)] \$20 Million 
+\end{itemize}
+\vspace{1.05in}}
+
+\only<3>{\begin{itemize}
+\item[1)] Will request
+\item[2)] Requested
+\item[3)] Secured
+\end{itemize}
+\vspace{0.825in}
+
+}
+
+%\only<4>{ \invisible<1-8>{\begin{itemize}
+%\item[1)] Will request
+%\item[2)] Request
+%\item[3)] Secured
+%\end{itemize}
+%\vspace{0.825in}
+%}}
+
+
+\only<5>{\begin{itemize}
+\item[1)] Alone 
+\item[2)] w/ Senate Democrat
+\item[3)] w/ Senate Republican 
+\end{itemize}
+\vspace{.825in}
+}
+
+\only<6>{\begin{itemize}
+\item[1)] Democrat
+\item[2)] Republican
+\end{itemize}
+\vspace{1.05in}
+}
+
+\only<7>{\begin{itemize}
+\item[] Advertising press release
+\end{itemize}
+\vspace{1.125in}
+}
+
+
+\pause \pause \pause \pause \pause 
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Rewarding Actions and Type of Expenditure, Not Money}
+
+\only<1>{Example  Treatment: \\
+\textbf{Headline}: Representative [blackbox] \alert{secured} \alert{\$50 Thousand} \alert{to purchase safety equipment for local firefighters}  \\
+\textbf{Body}: Representative [blackbox] (\alert{Democrat}) and \alert{Senator [blackbox], a Democrat}, \alert{secured} \alert{\$50 Thousand} \alert{to purchase safety equipment for local firefighters}.  \\
+Rep. [blackbox] said ``This money \alert{will help} \alert{our brave firefighters stay safe as they protect our businesses and homes}" \\}
+
+
+\only<2>{Example Treatment:\\
+\textbf{Headline}: Representative [blackbox] \alert{will request} \alert{\$20 million} \alert{for medical equipment at the local Planned Parenthood.}  \\
+\textbf{Body}: Representative [blackbox] (\alert{Democrat}), \alert{will request} \alert{\$20 million} \alert{for medical equipment at the local Planned Parenthood}.  \\
+Rep. [blackbox] said ``This money \alert{would help} \alert{provide state of the art care for women in our community.}" \\}
+
+\only<3->{
+\invisible<1-2>{\alert{214} other conditions} \\
+\invisible<1-3>{Dependent variable: Approve of representative}\\
+
+\vspace{0.175in}
+\large 
+\invisible<1-4>{\alert{Goal} $\leadsto$ measure effect of credit claiming content on approval ratings }
+\invisible<1-5>{Mechanics$\leadsto$  Mechanical Turk sample (\alert{Findings are replicated in representative samples, using real representatives/senators}  )}
+}
+
+
+\pause \pause \pause \pause \pause %\pause \pause 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Rewarding Actions and Type of Expenditure, Not Money}
+
+\begin{itemize} 
+\item[-] Participant  $i$ ($i=1, \hdots, N$), has treatment assignment $\textbf{T}_{i}$   \\
+\invisible<1>{\item[-] If $\text{T}_{i} = 0$ for control condition} \\
+\invisible<1-2>{\item[-] $\textbf{T}_{i} = (\text{T}_{i, \text{type}},  \text{T}_{i, \text{stage} },\text{T}_{i, \text{money}},  \text{T}_{i, \text{collab.}}, \text{T}_{i, \text{part.}} )$ }
+
+\invisible<1-3>{\item[-] $Y_{i}(\textbf{T}_{i} )$ : participant $i$'s Approval decision under treatment $\textbf{T}_{i} $}  
+\invisible<1-4>{\item[-] \alert{Quantities of Interest} } 
+\only<1-10>{\invisible<1-5>{\item[-] Effect of particular component of message: }
+\begin{itemize}
+\invisible<1-6>{\item[-] T$_{\text{stage}} = $ Secured}
+\invisible<1-7>{\item[-] T$_{\text{stage}}  = $ Requested }
+\invisible<1-8>{\item[-] T$_{\text{stage}} = $ Will Request } 
+\invisible<1-9>{\item[-] T$_{j} = k $} 
+\end{itemize}
+}
+
+
+\invisible<1-10>{\item[-]  Marginal Average Treatment Effect  (MATE$_{\text{T}_{j} = k } $) }  
+\end{itemize}
+\only<1-13>{
+\begin{eqnarray}
+\invisible<1-11>{\text{MATE}_{\text{T}_{j} = k} & = & \int \text{E}[Y(\text{T}_{j} = k , \textbf{T}_{-j} )  - Y(0) ] \text{d}\text{F}_{\textbf{T}_{-j} | \text{T}_{j} = k } \nonumber \\}
+\invisible<1-12>{\text{MATE}_{\text{T}_{j} = k} & = & \text{E}[Y(\text{T}_{j} = k ) - Y(0) ] \nonumber }
+\end{eqnarray}
+\vspace{1.5in}
+
+}
+\only<14->{   
+\begin{eqnarray}
+    \text{MATE}_{\text{T}_{j} = k}  & = & \text{E}[Y(\text{T}_{j} = k )|\text{T}_{j} = k ]  - \text{E}[Y(0)|\text{T} = 0 ] \nonumber \\
+\invisible<1-14>{\widehat{\text{MATE}_{\text{T}_{j} = k} } & = &    \frac{\sum_{i=1}^{N} Y_{i} I(\text{T}_{ij} = k)  }{\sum_{i=1}^{N} I(\text{T}_{ij} = k) } - \frac{\sum_{i=1}^{N} Y_{i} I(\text{T}_{i}=0)  }{\sum_{i=1}^{N} I(\text{T}_{i}= 0) } \nonumber                }
+\end{eqnarray}                    
+\vspace{1.5in}
+}
+
+
+
+
+\pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause 
+
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Rewarding Actions and Type of Expenditure, Not Money}
+%(1) Marginal Average Treatment Effect (MATE$_{T_{j} = k } $): $\text{E}[Y(T_{j} = k ) - Y(0) ]$ \\
+%\vspace{0.025in} 
+%\pause 
+\begin{itemize}
+\item[-] Response may be conditional on respondent characteristics $\textbf{x}$ \pause \\
+\invisible<1>{\item[-] For example $\textbf{x}  = $ (Conservative, Republican)} \pause \\
+\invisible<1-2>{\item[-] Marginal Conditional Average Treatment Effect (MCATE$_{\text{T}_{j} = k,\textbf{x}}$)} \pause 
+\end{itemize}
+\begin{eqnarray}
+\invisible<1-3>{\text{MCATE}_{\text{T}_{j} = k,\textbf{x}} & = & \text{E}[Y(\text{T}_{j} = k) - Y(0) | \textbf{x}] }    \nonumber\\
+\invisible<1-4>{\text{MCATE}_{\text{T}_{j} = k, \textbf{x}} & = & \text{E}[Y(\text{T}_{j} = k)|\textbf{x} ] - \text{E}[Y(0) | \textbf{x} ] \nonumber }  \nonumber 
+\end{eqnarray}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Rewarding Actions and Type of Expenditure, Not Money}
+\begin{eqnarray}
+\text{MCATE}_{\text{T}_{j} = k, \textbf{x}} & = & \text{E}[Y(\text{T}_{j} = k)|\textbf{x} ] - \text{E}[Y(0) | \textbf{x} ] \nonumber \\
+\only<1-8>{\invisible<1>{\widehat{\text{MCATE}_{\text{T}_{j} = k,\textbf{x}}}& = &\frac{\sum_{i=1}^{N} Y_{i} I(\text{T}_{j} = k ,  \textbf{x}_{i} = \textbf{x} )  }{\sum_{i=1}^{N} I(\text{T}_{j} = k , \textbf{x}_{i} = \textbf{x} ) }    - \frac{\sum_{i=1}^{N} Y_{i} I(\text{T}_{i}=0 , \textbf{x}_{i} = \textbf{x})  }{\sum_{i=1}^{N} I(\text{T}_{i}= 0 , \textbf{x}_{i} = \textbf{x}) }  \nonumber } \pause }
+\only<9->{
+\widehat{\text{MCATE}_{\text{T}_{j} = k,\textbf{x}}} & = & \widehat{g}_{m} (\text{T}_{j} = k, \textbf{x} ) - \widehat{g}_{m}(0, \textbf{x} ) \nonumber 
+}
+\end{eqnarray}
+
+
+
+\begin{itemize}
+\invisible<1-2>{\item[-] \alert{Curse of Dimensionality}: highly variable estimates, (sometimes) empty strata} 
+\invisible<1-3>{\item[-] Separate systematic differences from noise $\leadsto$ \alert{data} and \alert{assumptions} } \invisible<1-4>{ Heterogeneous treatment effect methods} % ($g_{m} (\text{T}_{j} = k, \textbf{x} ) $)}
+\begin{itemize}
+\invisible<1-5>{\item[-] LASSO, Find It (Imai and Ratkovic, 2013)$\leadsto$ sparsity} 
+\invisible<1-6>{\item[-] Ridge, KRLS (Hainmueller and Hazlett, 2013)$\leadsto$ flexible surface, dense} 
+\invisible<1-7>{\item[-] Model $m$ to estimate some function $g_{m}(\text{T}_{j} = k, \boldsymbol{x})$}
+\end{itemize}
+\invisible<1-8>{\item[-] Perform well: $g_{m}(\text{T}_{j} = k, \boldsymbol{x})$ accurately estimates response surface ($\text{E}[Y(\text{T}_{j} = k)|\textbf{x} ]$)}
+\invisible<1-9>{\item[-] Perform well: accurate out of sample prediction and classification (van der Laan et al 2007, Raftery et al 2005) }
+\end{itemize}
+
+\invisible<1-10>{Create ensemble: weighting methods by (unique) out of sample predictive performance}
+
+\pause \pause \pause \pause \pause \pause \pause \pause \pause \pause 
+
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Weighted Ensemble to Measure Credit Claiming Rate}
+
+\begin{itemize}
+\item[-] Suppose we have $M$ $(m = 1, \hdots, M)$ models.  
+\end{itemize}
+
+
+\begin{eqnarray}
+\only<1-13>{\invisible<1>{\widehat{\text{MCATE}_{\text{T}_{j} = k,\textbf{x}}}  & = & \sum_{m=1}^{M} \alert<3>{\widehat{\pi}_{m}} (\alert<4>{\widehat{g}_{m} (\text{T}_{j} = k, \textbf{x} )  }-\alert<4>{\widehat{ g}_{m} (0, \textbf{x} )  })} \nonumber }
+\only<14->{\alert{\widehat{\text{MCATE}_{\text{T}_{j} = k,\textbf{x}_{\text{new}}}}  }& = & \sum_{m=1}^{M} \alert{\widehat{\pi}_{m}} (\alert{\widehat{g}_{m} (\text{T}_{j} = k, \textbf{x}_{\text{new}} ) } -\alert{\widehat{ g}_{m} (0, \textbf{x}_{\text{new}} )  } )\nonumber }
+\end{eqnarray}
+
+\begin{itemize}
+\invisible<1-4>{\item[-] Estimate weights $(\widehat{\pi}_{m})$} 
+\only<1-12>{
+\begin{itemize}
+\invisible<1-5>{\item[-] 10-fold cross validation: generate $M$ out of sample predictions for each observation}
+\invisible<1-6>{\item[] $\widehat{\textbf{Y}}_{i}  = (\widehat{Y}_{i1}, \widehat{Y}_{i2}, \hdots, \widehat{Y}_{iM} )$} 
+\only<1-11>{\invisible<1-7>{\item[-] Estimate weights with constrained regression:}
+\begin{eqnarray}
+\invisible<1-8>{Y_{i} & = & \sum_{m=1}^{M} \pi_{m} \hat{Y}_{im} + \epsilon_{i} \nonumber }
+\end{eqnarray}
+\invisible<1-9>{\item[] where we impose constraints: $\pi_{m} \geq 0 $ and $\sum_{m=1}^{M} \pi_{m} = 1$. } 
+\invisible<1-10>{\item[-] Result $\widehat{\pi}_{m}$ for each method } }
+\only<12>{\item[-] (Alternatively) Estimate weights from mixture model (EBMA) (Raftery et al 2005;  Montgomery, Hollenback, Ward 2012)$\leadsto$ EM, Gibbs, Variational Approximation} 
+\end{itemize}
+}
+\invisible<1-12>{\item[-] Estimate  $\widehat{g}_{m}(\text{T}_{j} = k, \textbf{x} ) \leadsto $ Apply all $M$ models to entire data set} 
+
+\invisible<1-13>{\item[-] Generate effects  of interest (perhaps weighting to other population)  $\textbf{x}_{\text{new}}$ } 
+\end{itemize}
+%\invisible<1-14>{Applied to this experiment: Positive weight on three methods:} \\
+%\invisible<1-15>{(1) LASSO (0.62), (2) KRLS (0.24), (3) Find It (0.14)} 
+%\begin{eqnarray}
+%\invisible<1-11>{\text{Pr}(Y_{i} = \text{Credit} | \textbf{w}_{i} ) & = & \sum_{m=1}^{M} \widehat{\pi}_{m} \widehat{g}_{m}(\textbf{w}_{i} ) \nonumber } 
+%\end{eqnarray}
+%\invisible<1-14>{(Classify if above threshold)} \\
+%\invisible<1-15>{{\large \alert{90\% accuracy}} }\\
+
+\pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause \pause 
+\end{frame}
+
+
+
+
+% \begin{frame}
+% \frametitle{Monte Carlo Evidence}
+% \begin{center}
+% \only<1>{\scalebox{0.4}{\includegraphics{Plot1.pdf}}}
+% \only<2>{\scalebox{0.4}{\includegraphics{Plot2.pdf}}}
+% \only<3->{\scalebox{0.3}{\includegraphics{Plot2.pdf}}}
+% \end{center}
+% \only<3->{\large Ensembles outperform constituent methods $\leadsto$ ensembles place weight on  better performing method}
+
+% \end{frame}
+
+
+\begin{frame}
+\frametitle{Returning to \alert{Example} Experiment}
+
+\alert{Recall}: experiment to assess effects of credit claiming on approval $\leadsto$ 1,074 participants (MTurk) \pause  \\
+\invisible<1>{Apply ensemble method (7 constituent methods, 10 fold cross validation), including treatments and Partisanship and Ideology.  } \pause \\
+\invisible<1-2>{Positive  weight on three methods:} \pause 
+\begin{itemize}
+\invisible<1-3>{\item[1)] LASSO (0.62)} \pause 
+\invisible<1-4>{\item[2)] KRLS (0.24)} \pause 
+\invisible<1-5>{\item[3)] Find it (0.14) } 
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\begin{tikzpicture}
+\node (dumm) at (-8, 8) [] {} ; 
+\only<1-2, 4, 6>{\node (plot1) at (-5, 8) [] {\scalebox{0.25}{\includegraphics{HetExpIdeoFig2.pdf}}}; }
+\only<8>{\node (plot_no) at (-3, 8) [] {\scalebox{0.3}{\includegraphics{SmallTypeMoneyIdeology.pdf}}}; }
+\only<9->{\node (plot_no) at (-3, 8) [] {\scalebox{0.2}{\includegraphics{SmallTypeMoneyIdeology.pdf}}}; }
+\node (d_plan) at (-8, 4.5) [] {} ; 
+\node (d_plan3) at (-1.25, 4.5) [] {} ; 
+\node (d_plan2) at (-8, 5.75) [] {} ; 
+\node (d_plan4) at (-1.25, 5.75) [] {} ; 
+
+\only<2>{\draw[-, line width = 2pt, red] (d_plan) to [out = 0, in = 180] (d_plan3) ; 
+\draw[-, line width = 2pt, red] (d_plan2) to [out = 0, in = 180] (d_plan4) ; }
+
+\only<3>{\node (plot2) at (-5, 8) [] {\scalebox{0.4}{\includegraphics{HetPlanned.pdf}}}; }
+
+
+\node (d_gun) at (-8, 6.85) [] {} ; 
+\node (d_gun3) at (-1.25, 6.85) [] {} ; 
+\node (d_gun2) at (-8, 8.05) [] {} ; 
+\node (d_gun4) at (-1.25, 8.05) [] {} ; 
+
+\only<4>{\draw[-, line width = 2pt, red] (d_gun) to [out = 0, in = 180] (d_gun3) ; 
+\draw[-, line width = 2pt, red] (d_gun2) to [out = 0, in = 180] (d_gun4) ; }
+
+\node (d_gun) at (-8, 9.25) [] {} ; 
+\node (d_gun3) at (-1.25, 9.25) [] {} ; 
+\node (d_gun2) at (-8, 10.4) [] {} ; 
+\node (d_gun4) at (-1.25, 10.4) [] {} ; 
+
+
+\only<5>{\node (plot3) at (-5, 8) [] {\scalebox{0.4}{\includegraphics{HetGun.pdf}}}; }
+
+\only<6>{\draw[-, line width = 2pt, red] (d_gun) to [out = 0, in = 180] (d_gun3) ; 
+\draw[-, line width = 2pt, red] (d_gun2) to [out = 0, in = 180] (d_gun4) ; }
+
+\only<7>{\node (plot3) at (-5, 8) [] {\scalebox{0.4}{\includegraphics{HetPolice.pdf}}}; }
+
+
+
+\end{tikzpicture}
+
+\only<9>{$\leadsto$ Constituents evaluate expenditures using \alert{qualitative} information, rather than numerical facts}
+
+\pause \pause \pause \pause \pause \pause \pause \pause 
+
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Estimating Heterogeneous Treatment Effects and the Effects of Heterogeneous Treatments}
+
+Issues with experimental design \pause 
+\begin{itemize}
+\invisible<1>{\item[-] Treatments are conditional on what else is included: averaging other quantities $\neq$ to excluding other quantities} \pause 
+\invisible<1-2>{\item[-] Potential for \alert{fishing} is massive$\leadsto$ \alert{pre analysis plan} and \alert{split-sample design}} \pause 
+\invisible<1-3>{\item[-] Assumption about the way information delivered:} \pause 
+\begin{itemize}
+\invisible<1-4>{\item[1)] We know salient dimensions} \pause 
+\invisible<1-5>{\item[2)] We're constructing effects that correspond with effects in reality} 
+\end{itemize}
+\end{itemize}
+
+\pause 
+
+
+
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{The Causal Inference Problem}
+\begin{itemize}
+\item<1-> Two roles: text as \alert{outcome} and text as \alert{treatment}  
+\item<4-> Any text analysis requires \alert{mapping} from high to low dimensions 
+%\begin{itemize}
+%\item we call this a $g$ function
+%\item and it is central to the analysis
+%\end{itemize} \pause
+\item<5-> Need to look at the data to create a good maps 
+%\begin{itemize}
+%\item<6-> $\rightarrow$ potential for problems like \alert{false discovery}
+%\end{itemize} 
+\item<6-> Subtle problem: \alert{Fundamental Problem of Causal Inference with Latent Variables (PCILV)} 
+\begin{itemize}
+\item<7-> $\rightarrow$ use same observations to discover pattern and infer causal effects 
+\item<8-> $\rightarrow$ causes key properties of estimators (bias, consistency) to be \alert{undefined}
+\end{itemize}
+\item<9-> Text as treatment: \alert{always} requires an \alert{exclusion} restriction
+\end{itemize}
+
+\begin{center}
+\includegraphics<1>[width=.8\textwidth, page=1]{illustrations/TextOutcomeTreatment.pdf} %will be T -> Y
+\includegraphics<2>[width=.8\textwidth, page=2]{illustrations/TextOutcomeTreatment.pdf} % will be T -> Documents
+\includegraphics<3>[width=.8\textwidth, page=3]{illustrations/TextOutcomeTreatment.pdf} % Documents -> Y
+\includegraphics<4-5>[width=.8\textwidth]{illustrations/Gfn.pdf}
+\includegraphics<6-9>[width=.8\textwidth]{illustrations/SUTVA.pdf} 
+\end{center}
+
+\end{frame}
+
+%\begin{frame}
+%\frametitle{The Causal Inference Problem}
+%\pause
+%\begin{itemize}
+%\item Two roles: text as \alert{outcome} and text as \alert{treatment}  \pause
+%\item Any text analysis requires \alert{mapping} from high to low dimensions \pause \\
+%\begin{itemize}
+%\item we call this a $g$ function
+%\item and it is central to the analysis
+%\end{itemize} \pause
+%\item Need to look at the data to create a good maps \pause
+%\begin{itemize}
+%\item $\rightarrow$ potential for problems like \alert{false discovery}
+%\end{itemize} \pause
+%\item One subtle problem: \alert{Analyst-Induced SUTVA violation} \pause
+%\begin{itemize}
+%\item if we build our mapping by looking at the text \pause
+%\item $\rightarrow$ mapped outcome depends on \alert{every} unit's treatment assignment \pause
+%\item $\rightarrow$ SUTVA violation induced by the \alert{analyst} \pause
+%\end{itemize}
+%\end{itemize}
+%\end{frame}
+
+\begin{comment}
+\begin{frame}
+\frametitle{An Exciting New Journey of Discovery!}
+\begin{center}
+\includegraphics[height=.9\textheight]{images/HMS-Discovery.jpg}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{With Opportunities for Fishing}
+\includegraphics[width=\textwidth]{images/fishing2.jpg}
+\end{frame}
+\end{comment}
+
+\begin{frame}
+\frametitle{What's a social scientist to do?}
+\visible<2->{Two Solutions:}
+\begin{itemize}
+\item<3->[A)] Pre-Analysis Plan: 
+\begin{itemize}
+\item<4-> Specify mapping ``$g$'' function \textit{a priori} based on some background knowledge. 
+\end{itemize}
+\end{itemize}
+\begin{columns}[c]
+\begin{column}{.5\textwidth}
+\begin{itemize}
+\item<5->[B)] Train-Test Split (Our Plan):
+\begin{itemize}
+\item<6->[1)] Explicitly set aside a training set for \alert{discovery}. 
+\item<8->[2)] Use this \alert{training} set to \alert{develop a $g$ function} that maps high-dimensional data to measurements. 
+\item<9->[3)] Given $g$, \alert{estimate} the causal effect in \alert{test} set 
+\end{itemize}
+\end{itemize}
+\end{column}
+\begin{column}{.5\textwidth}
+\includegraphics<6>[width=.95\textwidth, page=1]{illustrations/TrainingTest.pdf}
+\includegraphics<7>[width=.95\textwidth, page=2]{illustrations/TrainingTest.pdf}
+\includegraphics<8>[width=.95\textwidth]{illustrations/DevelopingGFn.pdf}
+\includegraphics<9>[width=.95\textwidth]{illustrations/Estimation.pdf} % will be estimation
+\includegraphics<10>[width=.95\textwidth]{images/HMS-Discovery.jpg}
+
+\end{column}
+\end{columns}
+\begin{center}
+\visible<10>{Train-Test allows for \alert{discovery} while avoiding possibilities of overfitting and PCILV}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Two Running Examples: Treatment and Outcome}
+
+\pause
+\begin{columns}[c]
+\begin{column}{.5\textwidth}
+\begin{framed}
+Text as \alert{Treatment} \\
+\begin{center}
+\includegraphics[height=.3\textheight]{images/Trump.jpg}
+\end{center}
+
+What are the features of Trump messages that affect constituents? (Fong and Grimmer 2019)
+\end{framed}
+\end{column} \pause
+\begin{column}{.5\textwidth}
+\begin{framed}
+Text as \alert{Outcome} \\
+\begin{center}
+\includegraphics[height=.3\textheight]{images/TrumpBorder.jpeg}
+\end{center}
+
+How do presidents going public affect news coverage? (Franco, Grimmer, and Lim 2019)
+\end{framed}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+\huge
+What features of Trump's rhetoric cause a reaction? 
+\end{frame}
+
+
+
+\begin{frame}
+
+\scalebox{0.4}{\includegraphics{TrumpScreenTweet.png}}
+
+
+\end{frame}
+
+
+\begin{frame}
+
+  \alert{Tweet 1: }
+
+  {\tt
+  Why would Kim Jong-un insult me by calling me ``old," when I would NEVER call him ``short and fat?" Oh well, I try so hard to be his friend--and maybe someday that will happen!
+  }
+  \vspace{0.25in}
+
+  \alert{Tweet 2: }
+
+  {\tt
+  Steve Bannon will be a tough and smart new voice at @BreitbartNews...maybe even better than ever before. Fake News needs the competition!
+  } \\
+
+  \vspace{0.25in}
+
+\pause
+  \Large
+  \invisible<1>{Observe difference in evaluations of biographies } \pause \invisible<1-2>{$\leadsto$ Difficult to generalize underlying features (treatments) that drive response}
+
+\end{frame}
+
+\begin{frame}
+
+
+\alert{Tweet 1: }
+
+  {\tt
+  Steve Bannon will be a tough and smart new voice at @BreitbartNews...maybe even better than ever before. \alert{Fake} News needs the competition!
+  }
+
+\vspace{0.25in}
+
+\alert{Tweet 1$^{'}$:}
+
+{\tt
+  Steve Bannon will be a tough and smart new voice at @BreitbartNews...maybe even better than ever before. \sout{\alert{Fake}} News needs the competition!
+  }
+\pause 
+
+\vspace{0.125in}
+
+\invisible<1>{\Large Randomly assign 1, 1$^{'}$ and assess response $\leadsto$ are we interested in effect of one word?}
+
+
+\end{frame}
+
+
+
+\begin{frame}
+
+  \alert{Tweet 1: }
+
+  {\tt
+Negotiations on DACA have begun. Republicans want to make a deal and Democrats say they want to make a deal. Wouldn't it be great if we could finally, after so many years, solve the DACA puzzle. \alert{This will be our last chance, there will never be another opportunity!} March 5th.  }
+
+  \vspace{0.25in}
+
+  \alert{Tweet 2:}
+
+  {\tt
+Negotiations on DACA have begun. Republicans want to make a deal and Democrats say they want to make a deal. Wouldn't it be great if we could finally, after so many years, solve the DACA puzzle. \alert{I will use my office to negotiate a fair deal for the dreamers!} March 5th. } \\
+  \vspace{0.25in}
+
+  \Large
+  \pause
+\invisible<1>{\Large \alert{Latent Representation} (Codebook) $\leadsto$ true whether hand coded, supervised, or unsupervised}
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Text-Based Intervention}
+
+\Large
+
+  \begin{itemize}
+    \item[-] Assume ``Interesting'' treatments (coding) must be known in advance \pause   \medskip
+    \invisible<1>{\item[-] Discovery of treatments may (often/usually) happen after viewing data} \pause
+    \invisible<1-2>{\item[-] \alert{Explicit} discovery phase in research}
+  \end{itemize}
+ \end{frame}
+
+
+
+
+
+
+\begin{frame}
+  \frametitle{Three Key Steps}
+
+\pause
+  \Large
+  \begin{enumerate}
+    \invisible<1>{\item[1)] Theory: conditions to identify marginal effects of latent treatments (\alert{Average Marginal Component Effect} (AMCE) is identified) \medskip} \pause
+    \invisible<1-2>{\item[2)] Method for discovering features (treatments) \medskip} \pause
+    \invisible<1-3>{\item[3)] Method for estimating marginal effect for discovered features (treatments)}
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Identifying the Marginal Effects of Latent Treatments}
+
+  \Large
+  \begin{itemize}
+    \item[-] \alert{Average Marginal Component Effect} (AMCE): Isolate effect of one treatment, averaging over other treatments \medskip \pause
+    \invisible<1>{\item[-] Let $\boldsymbol{Z}_i$ be $i$'s binary feature vector \medskip}
+    \invisible<1>{\item[-] Ex: $\boldsymbol{Z}_i = (0, 0, 1, 1, 0)$} \pause
+  \end{itemize}
+
+  \invisible<1-2>{\begin{small}
+  \begin{eqnarray}
+    \text{AMCE}_{k} & = & \int_{\boldsymbol{Z}_{-k}} \alert<7>{\mathbb{E}}\left[\alert<4>{Y(Z_{k} = 1, \boldsymbol{Z}_{ -k} )}  - \alert<5>{Y(Z_{k} = 0, \boldsymbol{Z}_{ -k} )}\right] \alert<6>{m(\boldsymbol{Z}_{-k})} d\boldsymbol{Z}_{-k} \nonumber
+  \end{eqnarray}
+  \end{small}}
+
+
+\invisible<1-6>{\Large Conjoint With Discovered Treatments }\invisible<1-7>{\Large   (or) Discover Features that Drive Response in A/B Test}  
+\pause \pause \pause \pause\pause 
+
+\end{frame}
+
+
+
+
+\begin{frame}
+  \frametitle{Identifying the AMCE}
+  \begin{itemize}
+    \item[-] An individual sees a text ($\boldsymbol{X}_i$: text seen by $i$) \medskip
+    \item[-] \alert{Function} (assume known for now): text $\leadsto$ treatments in text ($\boldsymbol{Z}_i \equiv g(\boldsymbol{X}_i)$) \medskip
+     \item[] $\boldsymbol{Z}_i$ is a low-dimensional rep of $\boldsymbol{X}_i$, describing treatments
+  \end{itemize}
+
+\pause
+\invisible<1>{
+  Assume: \medskip} \pause
+  \begin{itemize}
+    \invisible<1-2>{\item[1)] No ``spillover" (SUTVA, Rubin 1986: $\tilde{Y}_i(\boldsymbol{X}) = \tilde{Y}_i(\boldsymbol{X}_i)$ )\medskip} \pause
+    \invisible<1-3>{\item[2)] Random assignment of texts ($\tilde{Y}_{i}(\boldsymbol{X}_{i}) \independent \boldsymbol{X}_{i}$ for all $i$ )\medskip} \pause
+    \invisible<1-4>{\item[3)] Exclusion Restriction: Treatment of interest $g$ is independent of other text features (Grimmer and Fong 2019) $\leadsto$ Vignette experiments} \pause
+    \invisible<1-5>{\item[4)] Common support: all combinations of treatments have non-zero probability ($f(\boldsymbol{Z}_i) > 0 $ for all $\boldsymbol{Z}_i \in \text{Range}\; g(\cdot)$)} \pause
+  \end{itemize}
+  \medskip
+
+  \begin{prop} \label{p:ident}
+  \invisible<1-6>{Assumptions 1-4 are sufficient to identify the AMCE$_{k}$ for arbitrary $k$. }
+  \end{prop}
+
+\end{frame}
+
+
+
+\begin{frame}
+
+\huge
+
+Discovering Treatments and Estimating Marginal Effects
+
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Discovery of Treatments from Text Corpora}
+
+
+  \pause
+  \begin{itemize}
+    \invisible<1>{\item[1)] (Assume) Randomly assign texts, $\boldsymbol{X}_i$, to respondents} \pause
+    \invisible<1-2>{\item[2)] Obtain responses $\boldsymbol{Y}_i$ for each respondent}\pause
+    \invisible<1-3>{\item[3)] (Randomly) divide texts and responses into training and test set} \pause
+    \begin{itemize}
+    \invisible<1-4>{\item[a)] Avoid identification issues} \pause
+    \invisible<1-5>{\item[b)] Help avoid overfitting }
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+\frametitle{What Can Go Wrong with the Fundamental Problem of Causal Inference with Latent Variables?}
+
+\pause 
+
+\invisible<1>{\begin{center}
+\begin{tabular}{r|cc}
+& Treated & Control \\
+\hline
+Person 1 &  Candidate Morals &  Taxes \\
+Person 2 &  Candidate Morals &   Taxes \\
+Person 3 &  Polarization &  Immigration \\
+Person 4 &  Polarization &  Immigration
+\end{tabular}
+\end{center}} \pause 
+
+\begin{itemize}
+  \item  \invisible<1-2>{$\boldsymbol{T}_{1} = (1, 1, 0, 0)$ $\leadsto$ Categories: Candidate Morals, Immigration} \pause 
+  \item \invisible<1-3>{$\boldsymbol{T}_{2} = (1,0,1, 0)$ $\leadsto$ Categories: Candidate Morals, Taxes, Polarization, Immigration } \pause 
+\end{itemize}
+
+\invisible<1-4>{Cannot compare categories from $\boldsymbol{T}_{1}$ and $\boldsymbol{T}_{2} \leadsto$ properties of estimator (bias, consistency) not defined! }
+
+\end{frame}
+
+
+\begin{frame}
+
+\huge 
+
+Discovery method for a $g$
+
+
+\end{frame}
+
+
+
+
+% \begin{frame}
+%   \frametitle{Discovering Interesting Treatments}
+
+% \Large
+%   Discovering function from texts to treatments $g()$ \pause
+%   \begin{itemize}
+%     \invisible<1>{\item[-]  \large Use both documents and responses to discover the function \medskip} \pause
+%     \invisible<1-2>{\item[-] \large \alert{Topic} and Supervised \alert{Topic} models workhorse text models (Blei, Ng, and Jordan 2003; Blei and McAuliffe, 2007) \pause }
+%   \end{itemize}
+%     \invisible<1-3>{ \alert{Treatments on simplex imply marginalization impossible} $\leadsto$ increase in one category implies decrease in other category}
+
+
+
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{A Refreshser on sLDA}
+
+%   Each document has a vector of topic proportions.  Proportions add up to 1.
+
+%   \begin{center}
+%   \begin{tabular}{| c | c | c |}
+%   \hline
+%   Education & Family & Occupation\\
+%   \hline
+%   degree & mother & doctor\\
+%   graduated & italian & practice\\
+%   science & ancestry & law\\
+%   law & n\'ee & business\\
+%   economics &  german & work\\
+%   \hline
+%   \end{tabular}
+%   \end{center}
+
+%   Substantive question: Is discussing education beneficial?
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Marginalizing on the Simplex}
+%   \begin{itemize}
+%     \item Ideal experiment: Compare how much a person likes a biography that is 50\% about education to one that is 30\% about education, all else equal \medskip
+%     \item Problem: All else \textit{cannot} be equal \medskip
+%     \item Less about education $\implies$ more about family or occupation
+%   \end{itemize}
+% \end{frame}
+
+\tikzset{
+    invisible/.style={opacity=0},
+    visible on/.style={alt=#1{}{invisible}},
+    alt/.code args={<#1>#2#3}{%
+      \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+  },
+}
+
+\begin{frame}
+  \frametitle{The Supervised Indian Buffet Process (sIBP, distinct [though related] to Quadrianto et al 2013) }
+  \begin{columns}
+  \hspace{.3cm}
+  \begin{column}{5.25cm}
+     \begin{figure}
+     \vspace{-1cm}
+     \begin{tikzpicture}
+     \tikzstyle{main}=[circle, minimum size = 10mm, thick, draw =black!80, node distance = 16mm]
+     \tikzstyle{connect}=[-latex, thick]
+     \tikzstyle{connect2}=[-latex, thick, red]
+     \tikzstyle{box}=[rectangle, draw=black!100]
+       \node[main] (Z) [label=right:$Z$] { };
+       \node[main] (X) [above right=1.5 and 0.25 of Z,fill=black!25, label=right:$X$] { };
+       \node[main] (A) [left=2.3 of X,label=left:$A$] { };
+       \node[main] (pi) [left=1.3 of Z,label=left:$\pi$] { };
+       \node[main] (Y) [below right=1.5 and 0.25 of Z,fill=black!25, label=right:$Y$] { };
+       \node[main] (beta) [above left=.1 and 2.6 of Y, label=left:$\beta$] { };
+       \node[main] (tau) [below left=.1 and 2.6 of Y, label=left:$\tau$] { };
+       \path (A) edge [connect] (X)
+             (Z) edge [connect] (X)
+             (Z) edge [connect] (Y)
+             (beta) edge [connect] (Y)
+             (tau) edge [connect] (Y)
+             (pi) edge [connect] (Z)
+             (tau) edge [connect] (beta);
+       \path[visible on=<2>] (pi) edge [connect2] (Z);
+       \path[visible on=<3>] (A) edge [connect2] (X)
+                   (Z) edge [connect2] (X);
+       \path[visible on=<4>] (beta) edge [connect2] (Y)
+                   (tau) edge [connect2] (Y)
+                   (Z) edge [connect2] (Y);
+     \end{tikzpicture}
+     \end{figure}
+    \small
+    Text and response depend on latent treatments
+  \end{column}
+  \hspace{.3cm}
+  \begin{column}{7.5cm}
+    \begin{itemize}
+      \small
+      \item[-] \alert{Treatment assignment}
+      \vspace{-.25cm}
+      \small
+      \begin{eqnarray}
+      z_{i,k} & \sim & \text{Bernoulli}(\pi_{k}) \nonumber\\
+      \pi_k & \sim & \prod_{m=1}^{k} \eta_m \nonumber\\
+      \eta_m & \sim & \text{Beta}\left(\alpha, 1\right) \nonumber
+      \end{eqnarray}
+      \item[-] \alert{Document Creation}:
+      \vspace{-.2cm}
+      \begin{eqnarray}
+      \boldsymbol{X}_{i} & \sim & \text{MVN}(\boldsymbol{Z}_{i} \boldsymbol{A}, \sigma^2_{X} I_{D}) \nonumber  \\
+      \boldsymbol{A}_k & \sim & \text{MVN}(\boldsymbol{0}, \sigma^2_A I_D) \nonumber
+      \end{eqnarray}
+      \item[-] \alert{Response}:
+      \vspace{-.2cm}
+      \begin{eqnarray}
+      Y_{i} & \sim & \text{MVN}(Z_{i} \boldsymbol{\beta}, \tau^{-1})\nonumber \\
+      \boldsymbol{\beta} | \tau & \sim & \text{MVN}(\boldsymbol{0}, \tau^{-1} I_K) \nonumber\\
+      \tau & \sim & \text{Gamma}(a,b) \nonumber
+      \end{eqnarray}
+    \end{itemize}
+  \end{column}
+  \end{columns}
+\end{frame}
+
+% \begin{frame}
+%   \frametitle{Inferring the parameters}
+%   \begin{itemize}
+%     \item Goal: Obtain $p(\boldsymbol{Z}, \boldsymbol{\pi}, \boldsymbol{A}, \boldsymbol{\beta}, \tau \;|\; \boldsymbol{X}, \boldsymbol{Y}, \alpha, \sigma_X^2, \sigma_A^2, a, b)$ \medskip
+%     \item Posterior intractable \medskip
+%     \item Use variational approximation \medskip
+%     \begin{itemize}
+%       \item Use a family of approximating distributions \medskip
+%       \item Find member of family closest to true posterior \medskip
+%       \item Able to find this without knowing true posterior
+%     \end{itemize}
+%   \end{itemize}
+% \end{frame}
+
+% \begin{frame}
+%   \frametitle{Interpreting the Treatments}
+%   \begin{itemize}
+%     \item Each column of $\boldsymbol{X}$ is standardized to mean 0, sd 1 \medskip
+%     \item $X_{i,j} \sim N(\sum_{k=1}^{K} Z_{i,k} A_{k,j}, \sigma_X^2)$ \medskip
+%     \item Largest $\boldsymbol{A}_{k,\cdot}$ give words most characteristic of $k$ \medskip
+%     \item Ex: If $A_{k,j}$ is large for ``graduated,'' ``college,'' and ``degree,'' $\boldsymbol{Z}_{\cdot, k}$ is education
+%   \end{itemize}
+% \end{frame}
+
+\begin{frame}
+  \frametitle{Discovery of Treatments from Text Corpora}
+  \begin{itemize}
+    \item[1)] Randomly assign texts, $\boldsymbol{X}_i$, to respondents
+    \item[2)] Obtain responses $\boldsymbol{Y}_i$ for each respondent
+    \item[3)] Divide texts and responses into training and test set
+    \item[4)] In training set: Discover mapping from texts to treatments \pause
+    \begin{itemize}
+    \invisible<1>{\item[a)] Apply supervised Indian Buffet Process (sIBP) to documents and responses to infer latent treatments in texts  } \pause
+    \invisible<1-2>{\item[b)] Model selection via nonparametric process, quantitative fit, and qualitative assessment} \pause
+    \end{itemize}
+    \invisible<1-3>{\item[5)] In test set: infer treatments and measure their effect} \pause
+    \begin{itemize}
+    \invisible<1-4>{\item[a)] Use sIBP trained on training set to infer latent treatments on test set documents (without conditioning on test set responses)} \pause
+    \invisible<1-5>{\item[b)] Estimate effect of treatments with regression, with a bootstrap procedure to estimate uncertainty}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Trump Tweets}
+
+{\tt YouGov}: survey response to trump tweets \pause 
+
+\only<2>{
+  \scalebox{0.4}{\includegraphics{TrumpScreenTweet.png}}
+}
+\pause 
+\begin{itemize}
+\invisible<1-2>{\item[-] Survey Equal \# Republicans, Democrats, Independents: read Trump tweet + evaluate ({\tt Great, Good, OK, Bad, Terrible})} \pause 
+\invisible<1-3>{\item[-] Aggregate, create scale $[-200,200]$} \pause 
+\invisible<1-4>{\item[-] Modify sIBP: Shared treatments, discover heterogeneous effects} \pause 
+\invisible<1-5>{\item[-] Train (66\%), Test (33\%), Clustered by tweet} \pause 
+\end{itemize} 
+
+\invisible<1-6>{\begin{footnotesize}
+\begin{tabular}{|lllll|}
+  \hline
+ Treatment 1 & Treatment 2 & Treatment 3 & Treatment 4 & Treatment 5 \\ 
+  \hline
+ fake & cuts & obamacare & flotus & prime \\ 
+   news & strange & senators & behalf & minister \\ 
+   media & tax & repeal & anthem & korea \\ 
+   cnn & luther & healthcare & melania & north \\ 
+   election & stock & replace & nfl & stock \\ 
+   story & market & republican & flag & market \\ 
+   nbc & alabama & vote & prayers & china \\ 
+   stories & reform & republicans & bless & executive \\ 
+   hillary & record & senate & ready & prayers \\ 
+   clinton & high & north & players & order \\ 
+   \hline
+\end{tabular}
+\end{footnotesize}}
+
+
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\scalebox{0.29}{\includegraphics{images/TrumpTE.pdf}}
+
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\Large 
+Sensitivity Analysis: analogous to residual plot in linear regression  \pause \\
+
+\invisible<1>{R Package: {\tt textEffect}} 
+
+\end{frame}
+
+
+
+\begin{frame}
+\Huge
+
+Text as Outcome
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\Huge
+
+How do presidents ``going public" affect public opinion?
+\end{frame}
+
+
+\begin{frame}
+
+\begin{center}
+\only<1>{\scalebox{0.45}{\includegraphics{ApprovalPlot.pdf}}}
+\only<2>{\scalebox{0.45}{\includegraphics{MIP_Problem.pdf}}}
+\only<3>{\scalebox{0.45}{\includegraphics{Topics.pdf}}}
+\only<4>{\Huge How do presidents ``going public" affect the media agenda?}
+
+
+\only<5>{\scalebox{0.6}{\includegraphics{GoingPublicOverall.pdf}}}
+\end{center}
+\end{frame}
+
+
+\begin{frame}
+
+\Large
+
+\begin{itemize}
+\item[1)] (Assume) random assignment of treatments (use an interrupted time series design) \pause 
+\invisible<1>{\item[2)] Obtain text based response $\boldsymbol{Y}_{i}(T_{i})$}
+\end{itemize} \pause 
+
+\invisible<1-2>{Function $g$ now uncovers latent features of response: map from text to small number of categories} \pause 
+
+\invisible<1-3>{\begin{eqnarray}
+\text{ATE}_{k} & = & \text{E}[ g(\boldsymbol{Y}(1))_{k} -g(\boldsymbol{Y}(0))_{k}] \nonumber 
+\end{eqnarray}}
+
+
+\end{frame}
+
+\begin{frame}
+\alert{Discovering (Estimating) Dependent Variable}
+
+\Large
+\begin{itemize}
+\item[-] Numerous options to discover: hand coding, supervised models, unsupervised models, mixture \pause 
+\invisible<1>{\item[-] \alert{All} have same worries: (1) FPCILV (2) Overfitting (potentially via Fishing)} \pause 
+\end{itemize}
+
+\invisible<1-2>{\alert{Train/Test Split}} 
+
+
+\end{frame}
+
+
+\begin{frame}
+
+\Large
+\begin{itemize}
+\item[1)] (Assume) random assignment of treatments
+\item[2)] Obtain text based response $\boldsymbol{Y}_{i}(T_{i})$ \pause 
+\invisible<1>{\item[3)] Randomly split response and text into train/test split} \pause 
+\invisible<1-2>{\item[4)] In training set: discover latent dependent variables } \pause 
+\begin{itemize}
+\invisible<1-3>{\item[a)] Apply Structural Topic Model (Roberts, Stewart, and Airoldi 2017) }\pause 
+\invisible<1-4>{\item[b)] Make final model pick based on quantitative model fit and exploration}\pause 
+\end{itemize}
+\invisible<1-5>{\item[5)] In test set:}\pause 
+\begin{itemize}
+\invisible<1-6>{\item[a)] Infer dependent variables (using newly available updates to {\tt STM} software (Roberts, Stewart, and Tingley 2017))}\pause 
+\invisible<1-7>{\item[b)] Estimate effect of treatments on topic prevalence across categories}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+
+\Large 
+A President's effect on newspaper agenda \pause 
+\begin{itemize}
+\invisible<1>{\item[-] Response: newspaper articles mentioning {\tt president} in 10 highest circulation papers, two-week window around speech} \pause 
+\invisible<1-2>{\item[-] Treatment: Number of days before/after speech article was published} \pause 
+\invisible<1-3>{\item[-] 159,217 articles} \pause 
+\invisible<1-4>{\item[-] Train: 10\%, Test 90\%} \pause 
+\invisible<1-5>{\item[-] Effect estimate: interrupted time series design on topic prevalence (compare share immediately before to share day after)}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+
+\begin{center}
+\only<2>{\scalebox{0.65}{\includegraphics{AppealEffect.pdf}}}
+\only<1>{\scalebox{0.65}{\includegraphics{Announce.pdf}}} 
+\end{center}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}
+  \frametitle{Conclusions and Future Directions}
+
+\large
+  \begin{itemize}
+    \item[-] \Large \emph{Text as Data: How to Make Social Science Inferences Using Language} (Grimmer, Roberts, and Stewart In progress) \pause 
+    \begin{itemize}
+    \item  \invisible<1>{Sequential (inductive) approach to social science  } \pause 
+    \item  \invisible<1-2>{Build and refine theory with \alert{successive} experiments} \pause  
+  \end{itemize}
+    \item[-] \invisible<1-3> \Large Sensitivity analysis (Fong and Grimmer 2019) \pause 
+    \item[-] \invisible<1-4> \Large General Framework: Application to non-text settings (images, voting records, redistricting, and videos) \pause  
+    \item[-] \invisible<1-5> \Large Text as Treatment , Text as Outcome , Text as Confounder, Text as Treatment and Outcome
+    %\item[-] \Large Division into training and test set is a generally applicable idea even for \alert{causal inference} (see also, Wager and Athey 2015)
+  \end{itemize}
+
+\end{frame}
+
+
+
+\end{document}
