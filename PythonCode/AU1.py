@@ -87,7 +87,7 @@ wn.lemmatize('families', 'n')
 ##applying the porter stemmer to the gettysburg address
 
 
-text_5 = list(map(pt.stem, text_4))
+text_5 = list(map(pt.stem, text_3))
 
 ##now creating a dictionary that will count the occurrence of the words
 
